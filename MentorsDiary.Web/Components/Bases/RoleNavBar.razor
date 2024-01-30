@@ -1,66 +1,78 @@
 ﻿<AuthorizeView Roles="Administrator">
     <Authorized>
-        <div class="collapse" id="navbarToggleExternalContent">
-            <ul class="nav nav-pills nav-fill bg-secondary bg-opacity-50">
-                <li class="@StyleNavBarForDeputyDirector" @onclick="SetStyleForDeputyDirector">
-                    <a class="nav-link text-white" href="/deputydirector">ЗАМЕСТИТЕЛИ ДИРЕКТОРОВ</a>
-                </li>
-                <li class="@StyleNavBarForCurator" @onclick="SetStyleForCurator">
-                    <a class="nav-link text-white" href="/curator">КУРАТОРЫ</a>
-                </li>
-                <li class="@StyleNavBarForEvents" @onclick="SetStyleForEvents">
-                    <a class="nav-link text-white" href="/event" >МЕРОПРИЯТИЯ</a>
-                </li>
-                <li class="@StyleNavBarForStats" @onclick="SetStyleForStats">
-                    <a class="nav-link text-white" href="/group">ГРУППЫ</a>
-                </li>
-            </ul>
+        <div>
+            <Dropdown Placement="@Placement.BottomLeft">
+                <Overlay>
+                    <ul class="nav nav-pills nav-fill bg-secondary bg-opacity-50">
+                        <li class="@StyleNavBarForDeputyDirector" @onclick="SetStyleForDeputyDirector">
+                            <a class="nav-link text-white" href="/deputydirector">ЗАМЕСТИТЕЛИ ДИРЕКТОРОВ</a>
+                        </li>
+                        <li class="@StyleNavBarForCurator" @onclick="SetStyleForCurator">
+                            <a class="nav-link text-white" href="/curator">КУРАТОРЫ</a>
+                        </li>
+                        <li class="@StyleNavBarForEvents" @onclick="SetStyleForEvents">
+                            <a class="nav-link text-white" href="/event">МЕРОПРИЯТИЯ</a>
+                        </li>
+                        <li class="@StyleNavBarForStats" @onclick="SetStyleForStats">
+                            <a class="nav-link text-white" href="/group">ГРУППЫ</a>
+                        </li>
+                    </ul>
+                </Overlay>
+                <ChildContent>
+                    <a class="ant-dropdown-link" @onclick:preventDefault>
+                        Администратор <Icon Type="down" />
+                    </a>
+                </ChildContent>
+            </Dropdown>
         </div>
-        <style>
-            .nav_button {
-                visibility: visible;
-            }
-        </style>
     </Authorized>
-    <NotAuthorized/>
+    <NotAuthorized />
 </AuthorizeView>
 <AuthorizeView Roles="DeputyDirector">
     <Authorized>
-        <div class="collapse" id="navbarToggleExternalContent">
-            <ul class="nav nav-pills nav-fill bg-secondary bg-opacity-50">
-                <li class="@StyleNavBarForCurator" @onclick="SetStyleForCurator">
-                    <a class="nav-link text-white" href="/curator">КУРАТОРЫ</a>
-                </li>
-                <li class="@StyleNavBarForStats" @onclick="SetStyleForStats">
-                    <a class="nav-link text-white" href="/group">ГРУППЫ</a>
-                </li>
-            </ul>
+        <div>
+            <Dropdown Placement="@Placement.BottomLeft">
+                <Overlay>
+                    <ul class="nav nav-pills nav-fill bg-secondary bg-opacity-50">
+                        <li class="@StyleNavBarForCurator" @onclick="SetStyleForCurator">
+                            <a class="nav-link text-white" href="/curator">КУРАТОРЫ</a>
+                        </li>
+                        <li class="@StyleNavBarForStats" @onclick="SetStyleForStats">
+                            <a class="nav-link text-white" href="/group">ГРУППЫ</a>
+                        </li>
+                    </ul>
+                </Overlay>
+                <ChildContent>
+                    <a class="ant-dropdown-link" @onclick:preventDefault>
+                        Заместитель директора <Icon Type="down" />
+                    </a>
+                </ChildContent>
+            </Dropdown>
         </div>
-        <style>
-            .nav_button {
-                visibility: visible;
-            }
-        </style>
     </Authorized>
-    <NotAuthorized/>
+    <NotAuthorized />
 </AuthorizeView>
 <AuthorizeView Roles="Curator">
     <Authorized>
-        <div class="collapse" id="navbarToggleExternalContent">
-            <ul class="nav nav-pills nav-fill bg-secondary bg-opacity-50">
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/group">ГРУППЫ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/parents">РОДИТЕЛИ</a>
-                </li>
-            </ul>
+        <div>
+            <Dropdown Placement="@Placement.BottomLeft">
+                <Overlay>
+                    <ul class="nav nav-pills nav-fill bg-secondary bg-opacity-50">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/group">ГРУППЫ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/parents">РОДИТЕЛИ</a>
+                        </li>
+                    </ul>
+                </Overlay>
+                <ChildContent>
+                    <a class="ant-dropdown-link" @onclick:preventDefault>
+                        Куратор <Icon Type="down" />
+                    </a>
+                </ChildContent>
+            </Dropdown>
         </div>
-        <style>
-            .nav_button {
-                visibility: visible;
-            }
-        </style>
     </Authorized>
-    <NotAuthorized/>
+    <NotAuthorized />
 </AuthorizeView>

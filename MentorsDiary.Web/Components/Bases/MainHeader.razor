@@ -2,7 +2,7 @@
 
 <GridRow Gutter="8" Justify="start" Style="margin-top: 1.5rem; margin-bottom: 1.5rem">
     <GridCol Span="5" Flex=@("230px")>
-        <img class="w-100" src="img/image 3.png" alt="" aria-current="page" @onclick="NavigateToHome">
+        <img class="w-100" src="img/image 3.png" alt="" aria-current="page" @onclick="@(() => NavigationManager.NavigateTo("/"))">
     </GridCol>
     <GridCol Flex=@("auto")>
 
@@ -14,7 +14,7 @@
         }
         else
         {
-            <button class="btn-outline-primary" @onclick="NavigateToLoginWindow">ВОЙТИ</button>
+            <button class="btn-outline-primary" @onclick="@(() => NavigationManager.NavigateTo("/login"))">ВОЙТИ</button>
         }
         <input type="hidden" @onclick="UpdatePassword"/>
         <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" vievbox="0 0 24 24" width="24px" fill="#000000">

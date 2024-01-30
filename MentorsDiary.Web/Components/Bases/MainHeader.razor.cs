@@ -44,16 +44,6 @@ public partial class MainHeader
         }
     }
 
-    public void NavigateToLoginWindow()
-    {
-        NavigationManager.NavigateTo("/login");
-    }
-
-    private void NavigateToHome()
-    {
-        NavigationManager.NavigateTo("/");
-    }
-
     private async Task UpdatePassword()
     {
         var list = (await UserService.GetAllAsync() ?? Array.Empty<User>()).ToList();
