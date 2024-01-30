@@ -5,13 +5,13 @@
         <br />
         <Loading Spinning="@_isLoading">
             <div class="border border-primary border-1 rounded-2 p-2">
-                <MentorsDiary.Web.Components.Displays.PageTitle Title="Группы" Count="@Groups?.Count" Loading="_isLoading">
+                <PageTitleBox Title="Группы" Count="@Groups?.Count" Loading="_isLoading">
                     <AntDesign.Button OnClickStopPropagation="true"
                                       Class="mb-2"
                                       Type="@ButtonType.Link"
                                       Icon="plus"
                                       Size="small"
-                                      OnClick="async () => await CreateGroupAsync()">
+                                      OnClick="@(async () => await CreateGroupAsync())">
                         Добавить
                     </AntDesign.Button>
 
@@ -21,7 +21,7 @@
                                    TService="DivisionService">
 
                     </BodySearchBar>
-                </MentorsDiary.Web.Components.Displays.PageTitle>
+                </PageTitleBox>
 
                 @foreach (var group in Groups!)
                 {
@@ -32,25 +32,25 @@
                         <ActionTemplate>
                             <Space Size="@("3")">
                                 <SpaceItem>
-                                    <AntDesign.Button OnClickStopPropagation="true" Danger
+                                    <Button OnClickStopPropagation="true" Danger
                                                       Type="@ButtonType.Link"
-                                                      Size="small" OnClick="async () => await RemoveAsync(group)">
+                                                      Size="small" OnClick="@(async () => await RemoveAsync(group))">
                                         <Icon Type="@IconType.Outline.Delete" />
-                                    </AntDesign.Button>
+                                    </Button>
                                 </SpaceItem>
                                 <SpaceItem>
-                                    <AntDesign.Button OnClickStopPropagation="true"
+                                    <Button OnClickStopPropagation="true"
                                                       Type="@ButtonType.Link"
                                                       Size="small" OnClick="() => UpdateAsync(group)">
                                         <Icon Type="@IconType.Outline.Edit" />
-                                    </AntDesign.Button>
+                                    </Button>
                                 </SpaceItem>
                                 <SpaceItem>
-                                    <AntDesign.Button OnClickStopPropagation="true"
+                                    <Button OnClickStopPropagation="true"
                                                       Type="@ButtonType.Link"
                                                       Size="small" OnClick="() => ShowGroupPageAsync(group)">
                                         <Icon Type="@IconType.Outline.Search" />
-                                    </AntDesign.Button>
+                                    </Button>
                                 </SpaceItem>
                             </Space>
                         </ActionTemplate>
@@ -65,7 +65,7 @@
                 <br />
                 <Loading Spinning="@_isLoading">
                     <div class="border border-primary border-1 rounded-2 p-2">
-                        <MentorsDiary.Web.Components.Displays.PageTitle Title="Группы" Count="@Groups?.Count" Loading="_isLoading">
+                        <PageTitleBox Title="Группы" Count="@Groups?.Count" Loading="_isLoading">
 
                             <BodySearchBar OnSelectedItemChangedHandler="UpdateList"
                                            OnSearchItemChangedHandler="SearchList!"
@@ -73,11 +73,11 @@
                                            TService="DivisionService">
 
                             </BodySearchBar>
-                        </MentorsDiary.Web.Components.Displays.PageTitle>
+                        </PageTitleBox>
 
                         @foreach (var group in Groups!)
                         {
-                            <MentorsDiary.Web.Components.Displays.BoxCard>
+                            <BoxCard>
                                 <Body>
                                     <div class="row">
                                         <div class="col">
@@ -97,15 +97,15 @@
                                 <ActionTemplate>
                                     <Space Size="@("3")">
                                         <SpaceItem>
-                                            <AntDesign.Button OnClickStopPropagation="true"
+                                            <Button OnClickStopPropagation="true"
                                                               Type="@ButtonType.Link"
                                                               Size="small" OnClick="() => ShowGroupPageAsync(group)">
                                                 <Icon Type="@IconType.Outline.Search" />
-                                            </AntDesign.Button>
+                                            </Button>
                                         </SpaceItem>
                                     </Space>
                                 </ActionTemplate>
-                            </MentorsDiary.Web.Components.Displays.BoxCard>
+                            </BoxCard>
                         }
                     </div>
                 </Loading>

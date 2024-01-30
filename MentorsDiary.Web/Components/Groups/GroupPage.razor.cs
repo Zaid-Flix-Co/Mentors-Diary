@@ -255,7 +255,7 @@ public partial class GroupPage
 
         var filterParams = new FilterParams
         {
-            FilterOption = EnumFilterOptions.Contains,
+            FilterOption = FilterOptions.Contains,
             ColumnName = nameof(GroupId),
             FilterValue = Convert.ToString(GroupId)
         };

@@ -4,7 +4,7 @@
     <Authorized>
         <br />
         <div class="border border-primary border-1 rounded-2 p-2">
-            <MentorsDiary.Web.Components.Displays.PageTitle Title="События" Count="@Events?.Count" Loading="_isLoading">
+            <PageTitleBox Title="События" Count="@Events?.Count" Loading="_isLoading">
 
                 <AntDesign.Button OnClickStopPropagation="true"
                                   Class="mb-2"
@@ -19,7 +19,7 @@
                                         OnClearHandler="UpdateListAfterClearDatePicker"
                                         OnSearchItemChangedHandler="SearchList" />
 
-            </MentorsDiary.Web.Components.Displays.PageTitle>
+            </PageTitleBox>
 
             @if (Events != null)
             {

@@ -9,21 +9,26 @@ public class FilterParams
 
     public string FilterValue { get; set; } = string.Empty;
 
-    public EnumFilterOptions FilterOption { get; set; } = EnumFilterOptions.Contains;
+    public FilterOptions FilterOption { get; set; } = FilterOptions.Contains;
 }
 
 public class Filter<T>
 {
     public static async Task<IEnumerable<T>> FilteredData(IEnumerable<FilterParams> filterParams, IEnumerable<T> data)
     {
-        var distinctColumns = filterParams.Where(x => !string.IsNullOrEmpty(x.ColumnName)).Select(x => x.ColumnName).Distinct();
+        var distinctColumns = filterParams
+            .Where(x => !string.IsNullOrEmpty(x.ColumnName))
+            .Select(x => x.ColumnName)
+            .Distinct();
 
         foreach (var colName in distinctColumns)
         {
             var filterColumn = typeof(T).GetProperty(colName, BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public);
             if (filterColumn != null)
             {
-                var filterValues = filterParams.Where(x => x.ColumnName.Equals(colName)).Distinct();
+                var filterValues = filterParams
+                    .Where(x => x.ColumnName.Equals(colName))
+                    .Distinct();
 
                 if (filterValues.Count() > 1)
                 {
@@ -45,7 +50,7 @@ public class Filter<T>
         return data;
     }
 
-    private static Task<IEnumerable<T>> FilterData(EnumFilterOptions filterOption, IEnumerable<T> data, PropertyInfo filterColumn, string filterValue)
+    private static Task<IEnumerable<T>> FilterData(FilterOptions filterOption, IEnumerable<T> data, PropertyInfo filterColumn, string filterValue)
     {
         int outValue;
         DateTime dateValue;
@@ -54,31 +59,31 @@ public class Filter<T>
         {
             #region [StringDataType]  
 
-            case EnumFilterOptions.StartsWith:
+            case FilterOptions.StartsWith:
                 data = data.Where(x => filterColumn.GetValue(x, null) != null && filterColumn.GetValue(x, null)!.ToString().ToLower().StartsWith(filterValue.ToString().ToLower())).ToList();
                 break;
-            case EnumFilterOptions.EndsWith:
+            case FilterOptions.EndsWith:
                 data = data.Where(x => filterColumn.GetValue(x, null) != null && filterColumn.GetValue(x, null)!.ToString().ToLower().EndsWith(filterValue.ToString().ToLower())).ToList();
                 break;
-            case EnumFilterOptions.Contains:
+            case FilterOptions.Contains:
                 data = data.Where(x => filterColumn.GetValue(x, null) != null && filterColumn.GetValue(x, null)!.ToString().ToLower().Contains(filterValue.ToString().ToLower())).ToList();
                 break;
-            case EnumFilterOptions.DoesNotContain:
+            case FilterOptions.DoesNotContain:
                 data = data.Where(x => filterColumn.GetValue(x, null) == null ||
                                  (filterColumn.GetValue(x, null) != null && !filterColumn.GetValue(x, null).ToString().ToLower().Contains(filterValue.ToString().ToLower()))).ToList();
                 break;
-            case EnumFilterOptions.IsEmpty:
+            case FilterOptions.IsEmpty:
                 data = data.Where(x => filterColumn.GetValue(x, null) == null ||
                                  (filterColumn.GetValue(x, null) != null && filterColumn.GetValue(x, null).ToString() == string.Empty)).ToList();
                 break;
-            case EnumFilterOptions.IsNotEmpty:
+            case FilterOptions.IsNotEmpty:
                 data = data.Where(x => filterColumn.GetValue(x, null) != null && filterColumn.GetValue(x, null).ToString() != string.Empty).ToList();
                 break;
             #endregion
 
             #region [Custom]  
 
-            case EnumFilterOptions.IsGreaterThan:
+            case FilterOptions.IsGreaterThan:
                 if ((filterColumn.PropertyType == typeof(int) || filterColumn.PropertyType == typeof(int?)) && int.TryParse(filterValue, out outValue))
                 {
                     data = data.Where(x => Convert.ToInt32(filterColumn.GetValue(x, null)) > outValue).ToList();
@@ -89,7 +94,7 @@ public class Filter<T>
                 }
                 break;
 
-            case EnumFilterOptions.IsGreaterThanOrEqualTo:
+            case FilterOptions.IsGreaterThanOrEqualTo:
                 if ((filterColumn.PropertyType == typeof(int) || filterColumn.PropertyType == typeof(int?)) && int.TryParse(filterValue, out outValue))
                 {
                     data = data.Where(x => Convert.ToInt32(filterColumn.GetValue(x, null)) >= outValue).ToList();
@@ -101,7 +106,7 @@ public class Filter<T>
                 }
                 break;
 
-            case EnumFilterOptions.IsLessThan:
+            case FilterOptions.IsLessThan:
                 if ((filterColumn.PropertyType == typeof(Int32) || filterColumn.PropertyType == typeof(Nullable<Int32>)) && Int32.TryParse(filterValue, out outValue))
                 {
                     data = data.Where(x => Convert.ToInt32(filterColumn.GetValue(x, null)) < outValue).ToList();
@@ -113,7 +118,7 @@ public class Filter<T>
                 }
                 break;
 
-            case EnumFilterOptions.IsLessThanOrEqualTo:
+            case FilterOptions.IsLessThanOrEqualTo:
                 if ((filterColumn.PropertyType == typeof(Int32) || filterColumn.PropertyType == typeof(Nullable<Int32>)) && Int32.TryParse(filterValue, out outValue))
                 {
                     data = data.Where(x => Convert.ToInt32(filterColumn.GetValue(x, null)) <= outValue).ToList();
@@ -125,7 +130,7 @@ public class Filter<T>
                 }
                 break;
 
-            case EnumFilterOptions.IsEqualTo:
+            case FilterOptions.IsEqualTo:
                 if (filterValue == string.Empty)
                 {
                     data = data.Where(x => filterColumn.GetValue(x, null) == null
@@ -149,7 +154,7 @@ public class Filter<T>
                 }
                 break;
 
-            case EnumFilterOptions.IsNotEqualTo:
+            case FilterOptions.IsNotEqualTo:
                 if ((filterColumn.PropertyType == typeof(Int32) || filterColumn.PropertyType == typeof(Nullable<Int32>)) && Int32.TryParse(filterValue, out outValue))
                 {
                     data = data.Where(x => Convert.ToInt32(filterColumn.GetValue(x, null)) != outValue).ToList();
@@ -167,6 +172,7 @@ public class Filter<T>
                 break;
                 #endregion
         }
+
         return Task.FromResult(data);
     }
 }

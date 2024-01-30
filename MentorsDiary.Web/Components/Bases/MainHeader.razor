@@ -25,21 +25,21 @@
         {
             @switch (CurrentUser.Role)
             {
-                case EnumRoles.Administrator:
+                case Roles.Administrator:
                     <p class="mt-2">
                         <a href="/profile" class="nav-link" style="text-decoration: none;">
                             <Tag Color="@PresetColor.Gold.ToString()">@CurrentUser.Name</Tag>
                         </a>
                     </p>
                     break;
-                case EnumRoles.DeputyDirector:
+                case Roles.DeputyDirector:
                     <p class="mt-2">
                         <a href="/profile" class="nav-link" style="text-decoration: none;">
                             <Tag Color="@PresetColor.Purple.ToString()">@CurrentUser.Name</Tag>
                         </a>
                     </p>
                     break;
-                case EnumRoles.Curator:
+                case Roles.Curator:
                     <p class="mt-2">
                         <a href="/profile" class="nav-link" style="text-decoration: none;">
                             <Tag Color="@PresetColor.Red.ToString()">@CurrentUser.Name</Tag>

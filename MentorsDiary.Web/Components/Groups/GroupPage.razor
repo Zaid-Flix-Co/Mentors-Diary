@@ -8,8 +8,10 @@
                     <Image Class="img-fluid rounded" Src="../img/no-img.jpg" Alt="" />
                 </GridCol>
                 <GridCol Span="21">
-                    <h5 class="text-white" style="margin-bottom: 0; padding-left: 0">Номер группы: @CurrentGroup?.Name</h5>
-                    <Paragraph Copyable Class="text-white" Style="margin-bottom: 7px; padding-left: 0"><b>Куратор:</b> @CurrentGroup?.Curator?.User?.Name</Paragraph>
+                    <h5 class="text-white" style="margin-bottom: 0; padding-left: 0">Номер группы: @CurrentGroup.Name</h5>
+                    <Paragraph Copyable Class="text-white" Style="margin-bottom: 7px; padding-left: 0">
+                        <b>Куратор:</b> @CurrentGroup.Curator?.User?.Name
+                    </Paragraph>
                 </GridCol>
             </GridRow>
             <GridRow Gutter="16" Align="bottom" Justify="start">
@@ -49,7 +51,7 @@
                                             <SpaceItem>
                                                 <AntDesign.Button OnClickStopPropagation="true" Danger
                                                                   Type="@ButtonType.Link"
-                                                                  Size="small" OnClick="async () => await RemoveStudentAsync(student)">
+                                                                  Size="small" OnClick="@(async () => await RemoveStudentAsync(student))">
                                                     <Icon Type="@IconType.Outline.Delete" />
                                                 </AntDesign.Button>
                                             </SpaceItem>
@@ -84,7 +86,7 @@
                         {
                             @foreach (var groupEvent in GroupEvents)
                             {
-                                <MentorsDiary.Web.Components.Displays.BoxCard>
+                                <BoxCard>
                                     <Body>
                                         <div class="row">
                                             <div class="col">
@@ -104,25 +106,25 @@
                                     <ActionTemplate>
                                         <Space Size="@("3")">
                                             <SpaceItem>
-                                                <AntDesign.Button OnClickStopPropagation="true" Danger
+                                                <Button OnClickStopPropagation="true" Danger
                                                                   Type="@ButtonType.Link"
-                                                                  Size="small" OnClick="async () => await RemoveGroupEventAsync(groupEvent)">
+                                                                  Size="small" OnClick="@(async () => await RemoveGroupEventAsync(groupEvent))">
                                                     <Icon Type="@IconType.Outline.Delete" />
-                                                </AntDesign.Button>
+                                                </Button>
                                             </SpaceItem>
                                             <SpaceItem>
-                                                <AntDesign.Button OnClickStopPropagation="true"
+                                                <Button OnClickStopPropagation="true"
                                                                   Type="@ButtonType.Link"
                                                                   Size="small" OnClick="() => UpdateGroupEventAsync(groupEvent)">
                                                     <Icon Type="@IconType.Outline.Edit" />
-                                                </AntDesign.Button>
+                                                </Button>
                                             </SpaceItem>
                                             <SpaceItem>
                                                 <GroupEventPopover GroupEvent="groupEvent" />
                                             </SpaceItem>
                                         </Space>
                                     </ActionTemplate>
-                                </MentorsDiary.Web.Components.Displays.BoxCard>
+                                </BoxCard>
                             }
                         }
                         else

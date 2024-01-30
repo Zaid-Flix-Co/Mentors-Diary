@@ -1,0 +1,23 @@
+﻿@if(Source != null)
+{
+    <Avatar
+        Size="@Size"
+        Src="@Source">
+
+    </Avatar>
+}
+else
+{
+    <Avatar
+        Size="@Size">
+        @Label
+    </Avatar>
+}
+
+@code {
+    [Parameter] public string Size { get; set; } = "10rem";
+
+    [Parameter] public string Source { get; set; } = null!;
+
+    [Parameter] public string Label { get; set; } = null!;
+}

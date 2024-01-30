@@ -171,7 +171,7 @@ public class BaseController<TEntity, TRepository> : ControllerBase
             var fileBytes = await System.IO.File.ReadAllBytesAsync(Path.Combine(_env.ContentRootPath, Resources, avatarPath));
             return File(fileBytes, "image/png");
         }
-        else
-            return NotFound();
+
+        return NoContent();
     }
 }

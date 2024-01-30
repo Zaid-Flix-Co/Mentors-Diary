@@ -1,9 +1,9 @@
 ﻿namespace MentorsDiary.Application.Bases.Enums;
 
 /// <summary>
-/// Enum EnumEntityChangeType
+/// Enum EntityChangeTypes
 /// </summary>
-public enum EnumEntityChangeType
+public enum EntityChangeTypes
 {
     /// <summary>
     /// Без изменений

@@ -10,26 +10,13 @@ using Microsoft.AspNetCore.Components.Forms;
 
 namespace MentorsDiary.Web.Components.Students;
 
-/// <summary>
-/// Class StudentItem.
-/// Implements the <see cref="ComponentBase" />
-/// </summary>
-/// <seealso cref="ComponentBase" />
 public partial class StudentItem
 {
     #region PARAMETERS
 
-    /// <summary>
-    /// Gets or sets the student identifier.
-    /// </summary>
-    /// <value>The student identifier.</value>
     [Parameter]
     public int StudentId { get; set; }
 
-    /// <summary>
-    /// Gets or sets the group identifier.
-    /// </summary>
-    /// <value>The group identifier.</value>
     [Parameter]
     public int GroupId { get; set; }
 
@@ -37,38 +24,18 @@ public partial class StudentItem
 
     #region INJECTIONS
 
-    /// <summary>
-    /// Gets or sets the navigation manager.
-    /// </summary>
-    /// <value>The navigation manager.</value>
     [Inject]
     private NavigationManager NavigationManager { get; set; } = null!;
 
-    /// <summary>
-    /// Gets or sets the student service.
-    /// </summary>
-    /// <value>The student service.</value>
     [Inject]
     public StudentService StudentService { get; set; } = null!;
 
-    /// <summary>
-    /// Gets or sets the message service.
-    /// </summary>
-    /// <value>The message service.</value>
     [Inject]
     private MessageService MessageService { get; set; } = null!;
 
-    /// <summary>
-    /// Gets or sets the parent student service.
-    /// </summary>
-    /// <value>The parent student service.</value>
     [Inject]
     private ParentStudentService ParentStudentService { get; set; } = null!;
 
-    /// <summary>
-    /// Gets or sets the parent service.
-    /// </summary>
-    /// <value>The parent service.</value>
     [Inject]
     private ParentService ParentService { get; set; } = null!;
 
@@ -76,83 +43,44 @@ public partial class StudentItem
 
     #region PROPERTIES
 
-    /// <summary>
-    /// The student
-    /// </summary>
     private Student? _student = new();
 
-    /// <summary>
-    /// The parents
-    /// </summary>
     private List<Parent?> _parents = new();
 
-    /// <summary>
-    /// Gets the navigate to URI.
-    /// </summary>
-    /// <value>The navigate to URI.</value>
     private string NavigateToUri => $"/group-page/{GroupId}";
 
-    /// <summary>
-    /// The is loading
-    /// </summary>
     private bool _isLoading;
 
-    /// <summary>
-    /// The avatar
-    /// </summary>
     private string? _avatar;
 
-    /// <summary>
-    /// The new avatar
-    /// </summary>
     private string? _newAvatar;
 
-    /// <summary>
-    /// The resized image
-    /// </summary>
     private IBrowserFile? _resizedImage;
 
-    /// <summary>
-    /// Gets or sets the clone.
-    /// </summary>
-    /// <value>The clone.</value>
     private Student? Clone { get; set; } = new();
 
-    /// <summary>
-    /// The is image loading
-    /// </summary>
     private bool _isImageLoading;
 
     #endregion
 
-    /// <summary>
-    /// On initialized as an asynchronous operation.
-    /// </summary>
-    /// <returns>A Task representing the asynchronous operation.</returns>
     protected override async Task OnInitializedAsync()
     {
         await GetItemAsync();
     }
 
-    /// <summary>
-    /// Uploads the avatar path.
-    /// </summary>
     private async Task UploadAvatarPath()
     {
         if (_student!.ImagePath != null)
         {
-            var result = await StudentService?.GetAvatarAsync(_student!.ImagePath)!;
-            if (result != null)
+            var result = await StudentService.GetAvatarAsync(_student!.ImagePath);
+
+            if (result.IsSuccessStatusCode)
                 _avatar = result.RequestMessage?.RequestUri?.ToString();
             else
-                await MessageService?.Error("Ошибка фотографии.")!;
+                Console.WriteLine("Ошибка фотографии");
         }
     }
 
-    /// <summary>
-    /// Get item as an asynchronous operation.
-    /// </summary>
-    /// <returns>A Task representing the asynchronous operation.</returns>
     private async Task GetItemAsync()
     {
         _isLoading = true;
@@ -162,7 +90,7 @@ public partial class StudentItem
         _parents = (await ParentStudentService.GetAllByFilterAsync(new FilterParams
         {
             ColumnName = "StudentId",
-            FilterOption = EnumFilterOptions.Contains,
+            FilterOption = FilterOptions.Contains,
             FilterValue = _student?.Id.ToString()!
         }) ?? Array.Empty<ParentStudent>()).Select(p => p.Parent).ToList();
 
@@ -172,10 +100,6 @@ public partial class StudentItem
         StateHasChanged();
     }
 
-    /// <summary>
-    /// Save as an asynchronous operation.
-    /// </summary>
-    /// <returns>A Task representing the asynchronous operation.</returns>
     private async Task SaveAsync()
     {
         _isLoading = true;
@@ -189,12 +113,10 @@ public partial class StudentItem
                 await UploadAvatar();
 
             var responseUpdateStudent = await StudentService.UpdateAsync(_student);
-
             var responseUpdateMother = await ParentService.UpdateAsync(_parents[0]!);
             var responseUpdateFather = await ParentService.UpdateAsync(_parents[1]!);
             
-            if (responseUpdateStudent.IsSuccessStatusCode && responseUpdateMother.IsSuccessStatusCode &&
-                responseUpdateFather.IsSuccessStatusCode)
+            if (responseUpdateStudent.IsSuccessStatusCode && responseUpdateMother.IsSuccessStatusCode && responseUpdateFather.IsSuccessStatusCode)
                 await MessageService.Success($"Студент {_student.Name} успешно добавлен.");
             else
                 await MessageService.Error(responseUpdateStudent.ReasonPhrase);
@@ -206,9 +128,6 @@ public partial class StudentItem
         NavigationManager.NavigateTo(NavigateToUri);
     }
 
-    /// <summary>
-    /// Uploads the avatar.
-    /// </summary>
     private async Task UploadAvatar()
     {
         using var content = new MultipartFormDataContent();
@@ -219,7 +138,7 @@ public partial class StudentItem
             name: "\"files\"",
             fileName: fileName);
 
-        var response = await StudentService?.UploadAvatarAsync(content)!;
+        var response = await StudentService.UploadAvatarAsync(content)!;
 
         if (response.IsSuccessStatusCode)
         {
@@ -235,10 +154,6 @@ public partial class StudentItem
         _isImageLoading = false;
     }
 
-    /// <summary>
-    /// Handles the <see cref="E:InputFileChange" /> event.
-    /// </summary>
-    /// <param name="e">The <see cref="InputFileChangeEventArgs" /> instance containing the event data.</param>
     private async Task OnInputFileChange(InputFileChangeEventArgs e)
     {
         var imageFile = e.File;

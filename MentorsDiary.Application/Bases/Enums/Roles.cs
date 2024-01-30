@@ -1,9 +1,9 @@
 ﻿namespace MentorsDiary.Application.Bases.Enums;
 
 /// <summary>
-/// Enum EnumRoles
+/// Enum Roles
 /// </summary>
-public enum EnumRoles
+public enum Roles
 {
     /// <summary>
     /// The none

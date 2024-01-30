@@ -12,7 +12,7 @@ public class User : BaseUserCU, IHaveId, IHaveName, IHaveImage, IBaseUser
     [Key]
     public int Id { get; set; }
 
-    [Display(Name = "Имя")]
+    [Display(Name = "Имя")] 
     public string? Name { get; set; }
 
     [Display(Name = "Пароль")]
@@ -24,11 +24,7 @@ public class User : BaseUserCU, IHaveId, IHaveName, IHaveImage, IBaseUser
 
     public string? ImagePath { get; set; }
 
-    public DateTime? BirthDate { get; set; }
-
-    public string? Address { get; set; }
-
-    public EnumRoles? Role { get; set; }
+    public Roles? Role { get; set; }
 
     public int? DivisionId { get; set; }
 

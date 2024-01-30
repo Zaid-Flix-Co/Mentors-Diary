@@ -24,16 +24,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MentorsDiary.Application.DependencyInjection;
 
-/// <summary>
-/// Class ApplicationServiceCollectionExtensions.
-/// </summary>
 public static class ApplicationServiceCollectionExtensions
 {
-    /// <summary>
-    /// Adds the persistence.
-    /// </summary>
-    /// <param name="serviceCollection">The service collection.</param>
-    /// <returns>IServiceCollection.</returns>
     public static IServiceCollection AddApplication(this IServiceCollection serviceCollection)
     {
         #region ПОДКЛЮЧЕНИЕ РЕПОЗИТОРИЕВ

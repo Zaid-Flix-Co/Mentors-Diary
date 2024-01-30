@@ -39,7 +39,7 @@ namespace MentorsDiary.Persistence.Migrations.ContextMentorsDiaryEntityChangeLog
                     b.Property<DateTime>("ChangeTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("EntityChangeType")
+                    b.Property<int>("EntityChangeTypes")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);

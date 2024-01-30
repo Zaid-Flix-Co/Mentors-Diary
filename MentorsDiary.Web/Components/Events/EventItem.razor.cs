@@ -6,19 +6,10 @@ using Microsoft.AspNetCore.Components.Forms;
 
 namespace MentorsDiary.Web.Components.Events;
 
-/// <summary>
-/// Class EventItem.
-/// Implements the <see cref="ComponentBase" />
-/// </summary>
-/// <seealso cref="ComponentBase" />
 public partial class EventItem
 {
     #region PARAMETERS
 
-    /// <summary>
-    /// Gets or sets the event identifier.
-    /// </summary>
-    /// <value>The event identifier.</value>
     [Parameter]
     public int EventId { get; set; }
 
@@ -26,24 +17,12 @@ public partial class EventItem
 
     #region INJECTIONS
 
-    /// <summary>
-    /// Gets or sets the navigation manager.
-    /// </summary>
-    /// <value>The navigation manager.</value>
     [Inject]
     private NavigationManager NavigationManager { get; set; } = null!;
 
-    /// <summary>
-    /// Gets or sets the event service.
-    /// </summary>
-    /// <value>The event service.</value>
     [Inject]
     private EventService EventService { get; set; } = null!;
 
-    /// <summary>
-    /// Gets or sets the message service.
-    /// </summary>
-    /// <value>The message service.</value>
     [Inject]
     private MessageService MessageService { get; set; } = null!;
 
@@ -51,78 +30,42 @@ public partial class EventItem
 
     #region PROPERTIES
 
-    /// <summary>
-    /// The event
-    /// </summary>
     private Event? _event = new();
 
-    /// <summary>
-    /// Gets the navigate to URI.
-    /// </summary>
-    /// <value>The navigate to URI.</value>
     private static string NavigateToUri => "event";
 
-    /// <summary>
-    /// The is loading
-    /// </summary>
     private bool _isLoading;
 
-    /// <summary>
-    /// Gets or sets the clone.
-    /// </summary>
-    /// <value>The clone.</value>
     private Event? Clone { get; set; } = new();
 
-    /// <summary>
-    /// The avatar
-    /// </summary>
     private string? _avatar;
 
-    /// <summary>
-    /// The new avatar
-    /// </summary>
     private string? _newAvatar;
 
-    /// <summary>
-    /// The resized image
-    /// </summary>
     private IBrowserFile? _resizedImage;
 
-    /// <summary>
-    /// The is loading image
-    /// </summary>
     private bool _isLoadingImage;
 
     #endregion
 
-    /// <summary>
-    /// On initialized as an asynchronous operation.
-    /// </summary>
-    /// <returns>A Task representing the asynchronous operation.</returns>
     protected override async Task OnInitializedAsync()
     {
         await GetItemAsync();
     }
 
-    /// <summary>
-    /// Uploads the avatar path.
-    /// </summary>
     private async Task UploadAvatarPath()
     {
         if (_event!.ImagePath != null)
         {
-            var result = await EventService?.GetAvatarAsync(_event!.ImagePath)!;
+            var result = await EventService.GetAvatarAsync(_event!.ImagePath);
+
             if (result.IsSuccessStatusCode)
                 _avatar = result.RequestMessage?.RequestUri?.ToString();
             else
-                await MessageService?.Error("Ошибка фотографии.")!;
+                Console.WriteLine("Ошибка фотографии");
         }
     }
 
-    /// <summary>
-    /// Get item as an asynchronous operation.
-    /// </summary>
-    /// <returns>A Task representing the asynchronous operation.</returns>
     private async Task GetItemAsync()
     {
         _isLoading = true;
@@ -136,10 +79,6 @@ public partial class EventItem
         StateHasChanged();
     }
 
-    /// <summary>
-    /// Save as an asynchronous operation.
-    /// </summary>
-    /// <returns>A Task representing the asynchronous operation.</returns>
     private async Task SaveAsync()
     {
         _isLoading = true;
@@ -163,9 +102,7 @@ public partial class EventItem
 
         NavigationManager.NavigateTo(NavigateToUri);
     }
-    /// <summary>
-    /// Uploads the avatar.
-    /// </summary>
+
     private async Task UploadAvatar()
     {
         using var content = new MultipartFormDataContent();
@@ -192,14 +129,11 @@ public partial class EventItem
         _isLoadingImage = false;
     }
 
-    /// <summary>
-    /// Handles the <see cref="E:InputFileChange" /> event.
-    /// </summary>
-    /// <param name="e">The <see cref="InputFileChangeEventArgs" /> instance containing the event data.</param>
     private async Task OnInputFileChange(InputFileChangeEventArgs e)
     {
         _isLoadingImage = true;
         var imageFile = e.File;
+
         if (imageFile.ContentType != "image/jpeg" && imageFile.ContentType != "image/png")
         {
             await MessageService.Error("You can only upload JPG/PNG file!");
