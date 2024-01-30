@@ -7,7 +7,7 @@ using MentorsDiary.Application.Entities.Divisions.Domains;
 
 namespace MentorsDiary.Application.Entities.Groups.Domains;
 
-public class Group : BaseUserCU, IHaveId, IHaveName, IHaveImage
+public class Group : BaseUserCU, IHaveId, IHaveName
 {
     public int Id { get; set; }
 
@@ -20,8 +20,6 @@ public class Group : BaseUserCU, IHaveId, IHaveName, IHaveImage
     public int? DivisionId { get; set; }
 
     public virtual Division? Division { get; set; }
-
-    public string? ImagePath { get; set; }
 
     public int? CuratorId { get; set; }
 

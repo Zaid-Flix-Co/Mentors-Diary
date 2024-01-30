@@ -50,43 +50,17 @@ public partial class GroupItem
 
     private List<Division>? Divisions { get; set; } = new();
 
-    private Group? Clone { get; set; } = new();
-
     private List<Curator>? Curators { get; set; } = new();
 
     private static string NavigateToUri => "group";
 
     private bool _isLoading;
 
-    private string? _avatar;
-
-    private string? _newAvatar;
-
-    private IBrowserFile? _resizedImage;
-
-    private bool _isLoadingImage;
-
     #endregion
 
     protected override async Task OnInitializedAsync()
     {
         await GetListAsync();
-    }
-
-    /// <summary>
-    /// Uploads the avatar path.
-    /// </summary>
-    private async Task UploadAvatarPath()
-    {
-        if (_group!.ImagePath != null)
-        {
-            var result = await GroupService.GetAvatarAsync(_group!.ImagePath)!;
-
-            if (result.IsSuccessStatusCode)
-                _avatar = result.RequestMessage?.RequestUri?.ToString();
-            else
-                Console.WriteLine("Ошибка фотографии");
-        }
     }
 
     private async Task GetListAsync()
@@ -110,8 +84,6 @@ public partial class GroupItem
 
         _group = await GroupService.GetIdAsync(GroupId);
 
-        await UploadAvatarPath();
-
         _isLoading = false;
         StateHasChanged();
     }
@@ -128,10 +100,7 @@ public partial class GroupItem
 
             if (CurrentUser.Role == Roles.DeputyDirector)
                 _group.DivisionId = CurrentUser.DivisionId;
-
-            if (_isLoadingImage)
-                await UploadAvatar();
-
+            
             var response = await GroupService.UpdateAsync(_group);
 
             if (response.IsSuccessStatusCode)
@@ -141,59 +110,7 @@ public partial class GroupItem
         }
 
         _isLoading = false;
-        StateHasChanged();
 
         NavigationManager.NavigateTo($"/{NavigateToUri}");
-    }
-
-    private async Task UploadAvatar()
-    {
-        using var content = new MultipartFormDataContent();
-        var fileName = Path.GetRandomFileName();
-
-        content.Add(
-            content: new StreamContent(_resizedImage?.OpenReadStream() ?? Stream.Null),
-            name: "\"files\"",
-            fileName: fileName);
-
-        var response = await GroupService?.UploadAvatarAsync(content)!;
-
-        if (response.IsSuccessStatusCode)
-        {
-            _group!.ImagePath = fileName;
-            Clone!.ImagePath = fileName;
-
-            var result = await GroupService.GetAvatarAsync(_group!.ImagePath);
-            _avatar = result.RequestMessage?.RequestUri?.ToString();
-        }
-        else
-            await MessageService.Error("Upload failed.");
-
-        _isLoadingImage = true;
-    }
-
-    private async Task OnInputFileChange(InputFileChangeEventArgs e)
-    {
-        _isLoadingImage = true;
-        var imageFile = e.File;
-        if (imageFile.ContentType != "image/jpeg" && imageFile.ContentType != "image/png")
-        {
-            await MessageService.Error("You can only upload JPG/PNG file!");
-        }
-        else
-        {
-            _resizedImage = await imageFile.RequestImageFileAsync("image/png", 500, 500);
-
-            var ms = new MemoryStream();
-            await _resizedImage.OpenReadStream().CopyToAsync(ms);
-            var bytes = ms.ToArray();
-
-            var b64 = Convert.ToBase64String(bytes);
-
-            _newAvatar = "data:image/png;base64," + b64;
-            _avatar = _newAvatar;
-        }
-
-        StateHasChanged();
     }
 }

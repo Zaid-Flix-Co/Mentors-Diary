@@ -8,98 +8,93 @@
     <AuthorizeView Roles="Administrator, Curator" Context="first">
         <Authorized>
             <div class="container-fluid">
-                <Card Title=@("Добавление группы")>
-                    <Form Model="@_group">
-                        <Row Gutter="24">
-                            <GridCol Span="8">
-                                <AvatarBox Source="@_avatar" Label="@_group.Name"></AvatarBox>
-                                <FormItem>
-                                    <div class="custom-file">
-                                        <InputFile OnChange="OnInputFileChange" id="inputFileField" class="custom-file-input" />
-                                        <span class="custom-file" for="inputFileField"></span>
-                                    </div>
-                                </FormItem>
-                            </GridCol>
-                            <GridCol Span="16">
-                                <FormItem Label="Номер группы">
-                                    <Input @bind-Value="@context.Name" />
-                                </FormItem>
-                                <FormItem Label="Подразделение">
-                                    <Select Mode="default"
-                                            DataSource="@Divisions"
-                                            TItem="Division"
-                                            TItemValue="int?"
-                                            @bind-Value="@context.DivisionId"
-                                            LabelName="@nameof(Division.Name)"
-                                            ValueName="@nameof(Division.Id)"
-                                            EnableSearch
-                                            IgnoreItemChanges="false">
-                                    </Select>
-                                </FormItem>
-                                <FormItem Label="Куратор">
-                                    <Select Mode="default"
-                                            DataSource="@Curators"
-                                            TItem="Curator"
-                                            TItemValue="int?"
-                                            @bind-Value="@context.CuratorId"
-                                            LabelName="@nameof(Curator.Name)"
-                                            ValueName="@nameof(Curator.Id)"
-                                            EnableSearch
-                                            IgnoreItemChanges="false">
-                                    </Select>
-                                </FormItem>
-                                <FormItem>
-                                    <AntDesign.Button OnClick="() => NavigationManager.NavigateTo(NavigateToUri)" Type="AntDesign.ButtonType.Primary">
-                                        Назад
-                                    </AntDesign.Button>
-                                    <AntDesign.Button OnClick="SaveAsync" Type="AntDesign.ButtonType.Primary" HtmlType="submit">
-                                        Сохранить
-                                    </AntDesign.Button>
-                                </FormItem>
-                            </GridCol>
-                        </Row>
-                    </Form>
-                </Card>
+                <Title Level="2">Добавление группы</Title>
+                <Form Model="@_group"
+                      LabelColSpan="8"
+                      WrapperColSpan="16">
+                    <Row Gutter="24">
+                        <GridCol Span="24">
+                            <FormItem Label="Номер группы">
+                                <Input @bind-Value="@context.Name" />
+                            </FormItem>
+                            <FormItem Label="Подразделение">
+                                <Select Mode="default"
+                                        DataSource="@Divisions"
+                                        TItem="Division"
+                                        TItemValue="int?"
+                                        @bind-Value="@context.DivisionId"
+                                        LabelName="@nameof(Division.Name)"
+                                        ValueName="@nameof(Division.Id)"
+                                        EnableSearch>
+                                </Select>
+                            </FormItem>
+                            <FormItem Label="Куратор">
+                                <Select Mode="default"
+                                        DataSource="@Curators"
+                                        TItem="Curator"
+                                        TItemValue="int?"
+                                        @bind-Value="@context.CuratorId"
+                                        LabelName="@nameof(Curator.Name)"
+                                        ValueName="@nameof(Curator.Id)"
+                                        EnableSearch>
+                                </Select>
+                            </FormItem>
+                            <FormItem WrapperColOffset="8"
+                                      WrapperColSpan="16">
+                                <Button OnClick="() => NavigationManager.NavigateTo(NavigateToUri)"
+                                        Type="AntDesign.ButtonType.Primary">
+                                    Назад
+                                </Button>
+                                <Button OnClick="SaveAsync"
+                                        Type="AntDesign.ButtonType.Primary"
+                                        HtmlType="submit">
+                                    Сохранить
+                                </Button>
+                            </FormItem>
+                        </GridCol>
+                    </Row>
+                </Form>
             </div>
         </Authorized>
         <NotAuthorized>
             <AuthorizeView Roles="DeputyDirector" Context="second">
                 <Authorized>
                     <div class="container-fluid">
-                        <Card Title=@("Добавление группы")>
-                            <Form Model="@_group">
-                                <Row Gutter="24">
-                                    <GridCol Span="24">
-                                        <FormItem Label="Номер группы">
-                                            <Input @bind-Value="@context.Name" />
-                                        </FormItem>
-                                        <FormItem Label="Подразделение">
-                                            <span>@CurrentUser.Division?.Name</span>
-                                        </FormItem>
-                                        <FormItem Label="Куратор">
-                                            <Select Mode="default"
-                                                    DataSource="@Curators"
-                                                    TItem="Curator"
-                                                    TItemValue="int?"
-                                                    @bind-Value="@context.CuratorId"
-                                                    LabelName="@nameof(Curator.Name)"
-                                                    ValueName="@nameof(Curator.Id)"
-                                                    EnableSearch
-                                                    IgnoreItemChanges="false">
-                                            </Select>
-                                        </FormItem>
-                                        <FormItem>
-                                            <AntDesign.Button OnClick="() => NavigationManager.NavigateTo(NavigateToUri)" Type="AntDesign.ButtonType.Primary">
-                                                Назад
-                                            </AntDesign.Button>
-                                            <AntDesign.Button OnClick="SaveAsync" Type="AntDesign.ButtonType.Primary" HtmlType="submit">
-                                                Сохранить
-                                            </AntDesign.Button>
-                                        </FormItem>
-                                    </GridCol>
-                                </Row>
-                            </Form>
-                        </Card>
+                        <Title Level="2">Добавление группы</Title>
+                        <Form Model="@_group"
+                              LabelColSpan="8"
+                              WrapperColSpan="16">
+                            <Row Gutter="24">
+                                <GridCol Span="24">
+                                    <FormItem Label="Номер группы">
+                                        <Input @bind-Value="@context.Name" />
+                                    </FormItem>
+                                    <FormItem Label="Подразделение">
+                                        <span>@CurrentUser.Division?.Name</span>
+                                    </FormItem>
+                                    <FormItem Label="Куратор">
+                                        <Select Mode="default"
+                                                DataSource="@Curators"
+                                                TItem="Curator"
+                                                TItemValue="int?"
+                                                @bind-Value="@context.CuratorId"
+                                                LabelName="@nameof(Curator.Name)"
+                                                ValueName="@nameof(Curator.Id)"
+                                                        EnableSearch>
+                                        </Select>
+                                    </FormItem>
+                                    <FormItem WrapperColOffset="8"
+                                              WrapperColSpan="16">
+                                        <Button OnClick="() => NavigationManager.NavigateTo(NavigateToUri)" Type="AntDesign.ButtonType.Primary">
+                                            Назад
+                                        </Button>
+                                        <Button OnClick="SaveAsync" Type="AntDesign.ButtonType.Primary" HtmlType="submit">
+                                            Сохранить
+                                        </Button>
+                                    </FormItem>
+                                </GridCol>
+                            </Row>
+                        </Form>
                     </div>
                 </Authorized>
                 <NotAuthorized>
