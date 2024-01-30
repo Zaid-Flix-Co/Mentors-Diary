@@ -1,0 +1,19 @@
+﻿<div>
+    <Loading Spinning="_isLoading">
+        <p>
+            @GroupEvent.Event?.DateEvent?.ToString("D")
+        </p>
+        <p>УЧАСТНИКИ:</p>
+        @if (_students != null)
+        {
+            for (var index = 0; index < _students.Count; index++)
+            {
+                var student = _students[index];
+                <p><span>@(index + 1). </span>@student?.Name</p>
+            }
+        }
+        <Button Type="@ButtonType.Link" @onclick="_ => VisibleChanged.InvokeAsync(false)">
+            <Icon Type="@IconType.Outline.Close" />
+        </Button>
+    </Loading>
+</div>

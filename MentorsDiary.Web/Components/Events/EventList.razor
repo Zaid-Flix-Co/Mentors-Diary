@@ -1,0 +1,65 @@
+﻿@page "/event"
+
+<AuthorizeView Roles="Administrator">
+    <Authorized>
+        <br />
+        <div class="border border-primary border-1 rounded-2 p-2">
+            <MentorsDiary.Web.Components.Displays.PageTitle Title="События" Count="@Events?.Count" Loading="_isLoading">
+
+                <AntDesign.Button OnClickStopPropagation="true"
+                                  Class="mb-2"
+                                  Type="@ButtonType.Link"
+                                  Icon="plus"
+                                  Size="small"
+                                  OnClick="async () => await CreateEventAsync()">
+                    Добавить
+                </AntDesign.Button>
+                
+                <BodySearchBarRangeDate OnSelectedItemChangedHandler="UpdateList"
+                                        OnClearHandler="UpdateListAfterClearDatePicker"
+                                        OnSearchItemChangedHandler="SearchList" />
+
+            </MentorsDiary.Web.Components.Displays.PageTitle>
+
+            @if (Events != null)
+            {
+                @foreach (var data in Events)
+                {
+                    <MentorsDiary.Web.Components.Displays.BoxCard>
+                        <Body>
+                            <EventData Event="@data" />
+                        </Body>
+                        <ActionTemplate>
+                            <Space Size="@("2")">
+                                <SpaceItem>
+                                    <AntDesign.Button OnClickStopPropagation="true" Danger
+                                                      Type="@ButtonType.Link"
+                                                      Size="small" OnClick="async () => await RemoveAsync(data)">
+                                        <Icon Type="@IconType.Outline.Delete" />
+                                    </AntDesign.Button>
+                                </SpaceItem>
+                                <SpaceItem>
+                                    <AntDesign.Button OnClickStopPropagation="true"
+                                                      Type="@ButtonType.Link"
+                                                      Size="small" OnClick="() => UpdateAsync(data)">
+                                        <Icon Type="@IconType.Outline.Edit" />
+                                    </AntDesign.Button>
+                                </SpaceItem>
+                            </Space>
+                        </ActionTemplate>
+                    </MentorsDiary.Web.Components.Displays.BoxCard>
+                }
+            }
+
+            <GridRow Style="margin-top: 10px" Align="middle" Justify="center">
+                <GridCol Span="24">
+                    <hr style="margin-top: 0">
+                </GridCol>
+                <button type="button" style="margin-bottom: 1rem" class="btn btn-secondary" @onclick="DownloadExcelFileEvents">Экспорт</button>
+            </GridRow>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        Доступ ограничен.
+    </NotAuthorized>
+</AuthorizeView>

@@ -1,0 +1,30 @@
+﻿<div class="row">
+    @if (_avatar == null)
+    {
+        <div class="col">
+            <img class="img-thumbnail" src="../img/no-img.jpg" alt="">
+        </div>
+    }
+    else
+    {
+        <div class="col">
+            <img class="img-thumbnail" src="@_avatar" alt="">
+        </div>
+    }
+    <div class="col">
+        <div class="text-label">Имя</div>
+        <div>@Curator.User?.Name</div>
+    </div>
+    <div class="col">
+        <div class="text-label">Подразделение</div>
+        <div>@Curator.User?.Division?.Name</div>
+    </div>
+    <div class="col">
+        <div class="text-label">Телефон</div>
+        <div>@Curator.User?.Phone</div>
+    </div>
+    <div class="col">
+        <div class="text-label">Электронная почта</div>
+        <div>@Curator.User?.Email</div>
+    </div>
+</div>

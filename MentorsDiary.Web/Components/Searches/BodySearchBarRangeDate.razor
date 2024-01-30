@@ -1,0 +1,28 @@
+﻿<GridRow Gutter="8" Align="middle" Justify="start" Style="padding: 10px">
+    <GridCol Span="12">
+        <RangePicker TValue="DateTime?[]" 
+                     Value="SelectedRangeDateTime" 
+                     OnChange="OnSelectedItemChangedHandler"
+                     OnClear="OnClearHandler">
+            <SuffixIcon>
+                <Icon Type="calendar" Theme="twotone" />
+            </SuffixIcon>
+        </RangePicker>
+    </GridCol>
+    <GridCol Span="12">
+        <Search Placeholder="Введите текст для поиска"
+                OnChange="OnSearchItemChangedHandler"
+                EnterButton="true"
+                @bind-Value="@TxtValue">
+        </Search>
+    </GridCol>
+</GridRow>
+<GridRow Style="padding: 0" Justify="center">
+    <GridCol Span="24">
+        <hr class="m-0">
+    </GridCol>
+</GridRow>
+
+@code {
+
+}

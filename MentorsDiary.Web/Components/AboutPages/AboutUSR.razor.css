@@ -1,0 +1,456 @@
+﻿@font-face {
+    font-family: 'montserrat-semibold';
+    src: url('fonts/static/montserrat-semibold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'montserrat-light';
+    src: url('fonts/static/montserrat-light.ttf') format('truetype');
+}
+
+/* Заголовок УСР */
+.USR-Title {
+    font-family: montserrat-semibold;
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    color: black;
+}
+
+/* Для заголовков */
+.Title {
+    font-family: montserrat-semibold;
+    font-size: 20px;
+    color: black;
+}
+
+/* Для текста */
+.Text {
+    font-family: montserrat-light;
+    font-size: 18px;
+    line-height: 25px;
+    color: black;
+    margin-top: 10px;
+}
+
+/* Начальник УСР */
+.ChiefBlock {
+    margin: auto;
+    background-color: lightgray;
+    width: 100%;
+    height: auto;
+    display: flex;
+    border-radius: 20px;
+}
+
+/* Блок с фото начальника */
+.ChiefColumnLeft {
+    flex: 1;
+    padding: 20px;
+    background-color: lightgray;
+    width: auto;
+    height: 260px;
+    border-radius: 20px 0px 0px 20px;
+}
+
+.ChiefPhoto {
+    width: 180px;
+    height: 180px;
+    display: block;
+    margin: auto;
+    filter: drop-shadow(0 0 10px rgba(79, 79, 79, 0.5));
+    border-radius: 100px;
+}
+
+/* Информация о начальнике */
+.ChiefColumnRight {
+    text-align: left;
+    flex: 3;
+    padding: 20px;
+    background-color: lightgray;
+    width: 200px;
+    height: auto;
+    border-radius: 0px 20px 20px 0px;
+}
+
+/* Раздел "Функции управления" */
+.Functons {
+    margin: auto;
+    background-color: lightgray;
+    width: 100%;
+    height: auto;
+    padding-bottom: 10px;
+    border-radius: 20px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+/* Список функций */
+.List {
+    width: 80%;
+    padding-top: 20px;
+    padding-left: 10px;
+}
+
+.FuncText {
+    font-family: montserrat-light;
+    font-size: 18px;
+    padding-left: 30px;
+    padding-top: 10px;
+    color: black;
+}
+
+/* Раздел "Структура управления" */
+.Structure {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto 0 auto;
+}
+
+/* Фотографии сотрудников */
+.StructurePhoto {
+    width: 130px;
+    height: 130px;
+    margin-top: 30px;
+    filter: drop-shadow(0 0 10px rgba(79, 79, 79, 0.5));
+    border-radius: 300px;
+}
+
+/* ФИО сотрудников */
+.StructureFIO {
+    font-family: montserrat-semibold;
+    font-size: 18px;
+    color: black;
+}
+
+/* Карточки сотрудников */
+.Card1 {
+    flex: 1;
+    text-align: center;
+    background-color: lightgray;
+    margin: 10px 10px;
+    border-radius: 20px;
+    transition: 0.5s;
+    border: solid 3px;
+    border-color: lightgray;
+}
+
+.Card1:hover {
+    border-color: rgb(0, 0, 156);
+    transform: scale(1.06);
+}
+
+.Card2 {
+    flex: 1;
+    background-color: lightgray;
+    margin: 10px 10px;
+    text-align: center;
+    border-radius: 20px;
+    transition: 0.5s;
+    border: solid 3px;
+    border-color: lightgray;
+}
+
+.Card2:hover {
+    border-color: rgb(0, 0, 156);
+    transform: scale(1.06);
+}
+
+.Card3 {
+    flex: 1;
+    background-color: lightgray;
+    margin: 10px 10px;
+    text-align: center;
+    border-radius: 20px;
+    transition: 0.5s;
+    border: solid 3px;
+    border-color: lightgray;
+}
+
+.Card3:hover {
+    border-color: rgb(0, 0, 156);
+    transform: scale(1.06);
+}
+
+.Card4 {
+    flex: 1;
+    background-color: lightgray;
+    margin: 10px 10px;
+    text-align: center;
+    border-radius: 20px;
+    transition: 0.5s;
+    border: solid 3px;
+    border-color: lightgray;
+}
+
+.Card4:hover {
+    border-color: rgb(0, 0, 156);
+    transform: scale(1.06);
+}
+
+/* --- */
+
+/* Раздел "Функции отделов" */
+.Departure {
+    width: 100%;
+    margin: 0 auto 0 auto;
+}
+
+/* Отдел социальной поддержки */
+.Dep1 {
+    background-color: lightgray;
+    height: auto;
+    border-radius: 20px;
+    display: flex;
+}
+
+.Blueline {
+    flex: 1;
+    background-color: rgb(0, 0, 156);
+    width: 10px;
+    border-radius: 20px 0 0 20px;
+}
+
+.DepInfo {
+    flex: 30;
+    color: black;
+    font-family: montserrat-light;
+    font-size: 18px;
+    text-align: left;
+}
+
+/* Заголовок отдела */
+.DepTitle1 {
+    font-family: montserrat-semibold;
+    font-size: 18px;
+    padding-top: 20px;
+    padding-left: 30px;
+    color: black;
+}
+
+/* Отдел психологической поддержки */
+.Dep2 {
+    background-color: lightgray;
+    height: auto;
+    border-radius: 20px;
+    margin-top: 50px;
+    display: flex;
+}
+
+/* Заголовок отдела */
+.DepTitle2 {
+    font-family: montserrat-semibold;
+    font-size: 18px;
+    padding-top: 20px;
+    padding-left: 30px;
+    color: black;
+}
+
+.Greenline {
+    flex: 1;
+    background-color: rgb(10, 121, 0);
+    width: 10px;
+    border-radius: 20px 0 0 20px;
+}
+
+/* Раздел "Документы" */
+.Documents {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: auto;
+}
+
+/* Документы */
+.Doc {
+    flex: 1;
+    width: auto;
+    height: auto;
+    padding-bottom: 10px;
+    background-color: lightgray;
+    border: solid 3px;
+    border-color: lightgray;
+    border-radius: 20px;
+    margin: 10px 10px;
+    transition: 0.5s;
+    text-align: center;
+    cursor: pointer;
+    color: black;
+    font-family: montserrat-light;
+    font-size: 18px;
+}
+
+    .Doc:hover {
+        transform: scale(1.1);
+        border-color: rgb(0, 0, 156);
+    }
+
+    .Doc:nth-child(1) {
+        flex: 0.8;
+    }
+
+    .Doc:nth-child(2) {
+        flex: 1.2;
+    }
+
+    .Doc:nth-child(4) {
+        flex: 1.1;
+    }
+
+    .Doc:nth-child(5) {
+        flex: 1.1;
+    }
+
+    .Doc:nth-child(6) {
+        flex: 1.6;
+    }
+
+/* Иконки документов */
+.DocImg {
+    width: 70px;
+    height: 70px;
+    padding-top: 25px;
+}
+
+/* Содержимое блоков с документами */
+.DocData {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+/* Раздел "Программы и планы" */
+.Programs {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: auto;
+}
+
+/* Блок с программой */
+.Prog {
+    flex: 1;
+    margin: 10px 10px;
+    background-color: lightgray;
+    height: auto;
+    padding-bottom: 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.5s;
+    border: solid 3px;
+    border-radius: 20px;
+    border-color: lightgray;
+    color: black;
+    font-family: montserrat-light;
+    font-size: 18px;
+}
+
+    .Prog:hover {
+        transform: scale(1.06);
+        border-color: rgb(0, 0, 156);
+    }
+
+/* Планы. Строка 1*/
+.Plans1 {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: auto;
+}
+
+/* Блок с планом 1 строки */
+.Plan1 {
+    flex: 1;
+    margin: 10px 10px;
+    background-color: lightgray;
+    height: auto;
+    padding-bottom: 10px;
+    border: solid 3px;
+    border-radius: 20px;
+    border-color: lightgray;
+    transition: 0.5s;
+    text-align: center;
+    cursor: pointer;
+    color: black;
+    font-family: montserrat-light;
+    font-size: 18px;
+}
+
+    .Plan1:hover {
+        transform: scale(1.06);
+        border-color: rgb(0, 0, 156);
+    }
+
+/* Планы. Строка 2*/
+.Plans2 {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: auto;
+}
+
+/* Блок с планом 2 строки */
+.Plan2 {
+    flex: 1;
+    margin: 10px 10px;
+    background-color: lightgray;
+    height: auto;
+    padding-bottom: 10px;
+    border: solid 3px;
+    border-radius: 20px;
+    border-color: lightgray;
+    transition: 0.5s;
+    text-align: center;
+    cursor: pointer;
+    color: black;
+    font-family: montserrat-light;
+    font-size: 18px;
+}
+
+    .Plan2:hover {
+        transform: scale(1.06);
+        border-color: rgb(0, 0, 156);
+    }
+
+/* Раздел "Отчеты" */
+.Reports {
+    display: flex;
+    height: auto;
+    width: 100%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+/* Блок с отчетом */
+.Rep {
+    flex: 1;
+    background-color: lightgray;
+    border: solid 3px;
+    border-radius: 20px;
+    border-color: lightgray;
+    text-align: center;
+    transition: 0.5s;
+    cursor: pointer;
+    color: black;
+    font-family: montserrat-light;
+    font-size: 18px;
+}
+
+    .Rep:hover {
+        transform: scale(1.06);
+        border-color: rgb(0, 0, 156);
+    }
+
+/* Раздел "Контакты" */
+.Contacts {
+    background-color: lightgray;
+    height: auto;
+    width: 100%;
+    margin: auto;
+    border-radius: 20px;
+    padding: 30px 0 10px 30px;
+    color: black;
+    font-family: montserrat-light;
+    font-size: 18px;
+    text-align: left;
+}

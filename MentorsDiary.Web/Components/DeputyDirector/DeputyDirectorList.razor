@@ -1,0 +1,66 @@
+﻿@page "/deputydirector"
+
+<AuthorizeView Roles="Administrator">
+    <Authorized>
+        <br />
+        <div class="border border-primary border-1 rounded-2 p-2">
+            <MentorsDiary.Web.Components.Displays.PageTitle Title="Заместители директоров" Count="@Users?.Count" Loading="_isLoading">
+
+                <AntDesign.Button OnClickStopPropagation="true"
+                                  Class="mb-2"
+                                  Type="@ButtonType.Link"
+                                  Icon="plus"
+                                  Size="small"
+                                  OnClick="async () => await CreateDeputyDirectorAsync()">
+                    Добавить
+                </AntDesign.Button>
+
+                <BodySearchBar OnSelectedItemChangedHandler="UpdateList"
+                               OnSearchItemChangedHandler="SearchList"
+                               TValue="Division"
+                               TService="DivisionService" />
+
+            </MentorsDiary.Web.Components.Displays.PageTitle>
+
+            @if (Users != null)
+            {
+                @foreach (var data in Users)
+                {
+                    <MentorsDiary.Web.Components.Displays.BoxCard>
+                        <Body>
+                            <DeputyDirectorData DeputyDirector="@data"/>
+                        </Body>
+                        <ActionTemplate>
+                            <Space Size="@("2")">
+                                <SpaceItem>
+                                    <AntDesign.Button OnClickStopPropagation="true" Danger
+                                                      Type="@ButtonType.Link"
+                                                      Size="small" OnClick="async () => await RemoveAsync(data)">
+                                        <Icon Type="@IconType.Outline.Delete" />
+                                    </AntDesign.Button>
+                                </SpaceItem>
+                                <SpaceItem>
+                                    <AntDesign.Button OnClickStopPropagation="true"
+                                                      Type="@ButtonType.Link"
+                                                      Size="small" OnClick="() => UpdateAsync(data)">
+                                        <Icon Type="@IconType.Outline.Edit" />
+                                    </AntDesign.Button>
+                                </SpaceItem>
+                            </Space>
+                        </ActionTemplate>
+                    </MentorsDiary.Web.Components.Displays.BoxCard>
+                }
+            }
+
+            <GridRow Style="margin-top: 10px" Align="middle" Justify="center">
+                <GridCol Span="24">
+                    <hr style="margin-top: 0">
+                </GridCol>
+                <button type="button" style="margin-bottom: 1rem" class="btn btn-secondary" @onclick="DownloadExcelDeputyDirectors">Экспорт</button>
+            </GridRow>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        Доступ ограничен.
+    </NotAuthorized>
+</AuthorizeView>

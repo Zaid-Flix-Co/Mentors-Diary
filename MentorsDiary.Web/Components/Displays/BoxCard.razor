@@ -1,0 +1,35 @@
+﻿<div class="box-card @ShadowClass mb-2">
+    <div class="box-card__body">
+        <div class="row">
+            <div class="col">
+                @if (Body != null || ChildContent != null)
+                {
+                    @Body
+                    @ChildContent
+                }
+            </div>
+            @if (ActionTemplate != null)
+            {
+                <div class="col-auto">
+                    <div class="box-card-actions">
+                        @ActionTemplate
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private string ShadowClass => $"is-hover-shadow";
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = null!;
+
+    [Parameter]
+    public RenderFragment Body { get; set; } = null!;
+
+    [Parameter]
+    public RenderFragment ActionTemplate { get; set; } = null!;
+
+}

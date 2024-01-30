@@ -1,0 +1,13 @@
+﻿<div class="container" style="max-height: 400px; min-height: 400px; display: flex; justify-content: center; align-items: center;">
+    <Empty>
+        <DescriptionTemplate>
+            <span>@Content</span>
+        </DescriptionTemplate>
+    </Empty>
+</div>
+
+@code
+{
+    [Parameter]
+    public string Content { get; set; } = null!;
+}

@@ -1,0 +1,26 @@
+﻿<div class="row">
+    @if (_avatar == null)
+    {
+        <div class="col">
+            <img class="img-thumbnail" src="../img/no-img.jpg" alt="">
+        </div>
+    }
+    else
+    {
+        <div class="col">
+            <img class="img-thumbnail" src="@_avatar" alt="">
+        </div>
+    }
+    <div class="col">
+        <div class="text-label">Наименование</div>
+        <div>@Event.Name</div>
+    </div>
+    <div class="col">
+        <div class="text-label">Описание</div>
+        <div>@Event.Comment</div>
+    </div>
+    <div class="col">
+        <div class="text-label">Дата проведения</div>
+        <div>@Event.DateEvent?.ToString("D")</div>
+    </div>
+</div>

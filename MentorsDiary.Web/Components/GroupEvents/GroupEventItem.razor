@@ -1,0 +1,51 @@
+﻿@page "/group-event/{GroupEventId:int}/{GroupId:int}"
+
+<br />
+
+<Loading Spinning="@_isLoading">
+    <div class="container-fluid">
+        <Card Title=@("Добавление события")>
+            <Form Model="@_groupEvent">
+                <Row Gutter="24">
+                    <GridCol Span="24">
+                        <FormItem Label="Событие">
+                            <Select Mode="default"
+                                    DataSource="@Events"
+                                    TItem="Event"
+                                    TItemValue="int?"
+                                    @bind-Value="@context.EventId"
+                                    LabelName="@nameof(Event.Name)"
+                                    ValueName="@nameof(Event.Id)"
+                                    IgnoreItemChanges="false">
+                            </Select>
+                        </FormItem>
+                        <FormItem Label="Участники мероприятия">
+                            <Select Mode="multiple"
+                                    DataSource="@Students"
+                                    @bind-Values="@SelectedStudentsId"
+                                    LabelName="@nameof(Student.Name)"
+                                    ValueName="@nameof(Student.Id)"
+                                    TItemValue="int"
+                                    TItem="Student"
+                                    OnSelectedItemsChanged="OnSelectedItemsChangedHandler"
+                                        EnableSearch
+                                        EnableVirtualization>
+                            </Select>
+                        </FormItem>
+                        <FormItem Label="Число участников">
+                            <span>@SelectedStudentsId.Count()</span>
+                        </FormItem>
+                        <FormItem>
+                            <AntDesign.Button OnClick="() => NavigationManager.NavigateTo(NavigateToUri)" Type="AntDesign.ButtonType.Primary">
+                                Назад
+                            </AntDesign.Button>
+                            <AntDesign.Button OnClick="SaveAsync" Type="AntDesign.ButtonType.Primary" HtmlType="submit">
+                                Сохранить
+                            </AntDesign.Button>
+                        </FormItem>
+                    </GridCol>
+                </Row>
+            </Form>
+        </Card>
+    </div>
+</Loading>

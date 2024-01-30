@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33712.159
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MentorsDiary.Application", "MentorsDiary.Application\MentorsDiary.Application.csproj", "{83B940AE-9415-46C1-8F2E-5BF5F01B6D12}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{E13F115D-DA57-46F4-93DF-55874548B145}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{2A52DD12-99C2-4D9F-BBFF-73D1C6A97CD3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MentorsDiary.Persistence", "MentorsDiary.Persistence\MentorsDiary.Persistence.csproj", "{280BBA28-6263-4487-88C7-5176ABA5F84E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{FE1C546D-4224-4134-852D-2EBF5DBC11C2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MentorsDiary.API", "MentorsDiary.API\MentorsDiary.API.csproj", "{1A0E9761-36CA-4AAE-8D27-20DF135B75CF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MentorsDiary.Web", "MentorsDiary.Web\MentorsDiary.Web.csproj", "{A7573D87-98E2-4F48-B913-99633A831E24}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MentorsDiary.Desktop.Admin", "MentorsDiary.Desktop.Admin\MentorsDiary.Desktop.Admin.csproj", "{724671EC-C9A3-4D4F-8201-16B0F861196D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83B940AE-9415-46C1-8F2E-5BF5F01B6D12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83B940AE-9415-46C1-8F2E-5BF5F01B6D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83B940AE-9415-46C1-8F2E-5BF5F01B6D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83B940AE-9415-46C1-8F2E-5BF5F01B6D12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{280BBA28-6263-4487-88C7-5176ABA5F84E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{280BBA28-6263-4487-88C7-5176ABA5F84E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{280BBA28-6263-4487-88C7-5176ABA5F84E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{280BBA28-6263-4487-88C7-5176ABA5F84E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A0E9761-36CA-4AAE-8D27-20DF135B75CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A0E9761-36CA-4AAE-8D27-20DF135B75CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A0E9761-36CA-4AAE-8D27-20DF135B75CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A0E9761-36CA-4AAE-8D27-20DF135B75CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7573D87-98E2-4F48-B913-99633A831E24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7573D87-98E2-4F48-B913-99633A831E24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7573D87-98E2-4F48-B913-99633A831E24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7573D87-98E2-4F48-B913-99633A831E24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{724671EC-C9A3-4D4F-8201-16B0F861196D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{724671EC-C9A3-4D4F-8201-16B0F861196D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{724671EC-C9A3-4D4F-8201-16B0F861196D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{724671EC-C9A3-4D4F-8201-16B0F861196D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{83B940AE-9415-46C1-8F2E-5BF5F01B6D12} = {E13F115D-DA57-46F4-93DF-55874548B145}
+		{280BBA28-6263-4487-88C7-5176ABA5F84E} = {2A52DD12-99C2-4D9F-BBFF-73D1C6A97CD3}
+		{1A0E9761-36CA-4AAE-8D27-20DF135B75CF} = {FE1C546D-4224-4134-852D-2EBF5DBC11C2}
+		{A7573D87-98E2-4F48-B913-99633A831E24} = {FE1C546D-4224-4134-852D-2EBF5DBC11C2}
+		{724671EC-C9A3-4D4F-8201-16B0F861196D} = {FE1C546D-4224-4134-852D-2EBF5DBC11C2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0873575B-BC89-42F3-8439-FBA38EEED1BD}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,51 @@
+﻿@typeparam TValue
+@typeparam TService
+
+<GridRow Gutter="8" Align="middle" Justify="start" Style="padding: 10px">
+    <AuthorizeView Roles="Administrator">
+        <Authorized>
+            <GridCol Span="12">
+                <Select TItem="TValue"
+                        TItemValue="string"
+                        DataSource="@Values"
+                        @bind-Value="@SelectedValue"
+                        LabelName="@nameof(Division.Name)"
+                        ValueName="@nameof(Division.Name)"
+                        Placeholder="Выберите"
+                        DefaultActiveFirstOption="false"
+                        EnableSearch
+                        OnSelectedItemChanged="OnSelectedItemChangedHandler!">
+                </Select>
+            </GridCol>
+            <GridCol Span="12">
+                <Search Placeholder="Введите текст для поиска"
+                        OnChange="OnSearchItemChangedHandler"
+                        AllowClear="true"
+                        OnPressEnter="OnPressEnterHandler"
+                        EnterButton="true"
+                        @bind-Value="@TxtValue">
+                </Search>
+            </GridCol>
+        </Authorized>
+        <NotAuthorized>
+
+        </NotAuthorized>
+    </AuthorizeView>
+    <AuthorizeView Roles="Curator,DeputyDirector">
+        <Authorized>
+            <Search Placeholder="Введите текст для поиска"
+                    OnChange="OnSearchItemChangedHandler"
+                    EnterButton="true"
+                    @bind-Value="@TxtValue">
+            </Search>
+        </Authorized>
+        <NotAuthorized>
+
+        </NotAuthorized>
+    </AuthorizeView>
+</GridRow>
+<GridRow Style="padding: 0" Justify="center">
+    <GridCol Span="24">
+        <hr class="m-0">
+    </GridCol>
+</GridRow>

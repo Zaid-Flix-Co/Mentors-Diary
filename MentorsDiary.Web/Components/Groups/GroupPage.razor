@@ -1,0 +1,155 @@
+﻿@page "/group-page/{GroupId:int}"
+
+<Loading Spinning="@_isLoading">
+    <div class="container bg-secondary bg-opacity-50 my-4" style="min-height: 600px; max-height: 800px">
+        <div class="container-fluid">
+            <GridRow Gutter="16" Align="middle" Style="padding-top: 10px; padding-bottom: 10px">
+                <GridCol Span="3">
+                    <Image Class="img-fluid rounded" Src="../img/no-img.jpg" Alt="" />
+                </GridCol>
+                <GridCol Span="21">
+                    <h5 class="text-white" style="margin-bottom: 0; padding-left: 0">Номер группы: @CurrentGroup?.Name</h5>
+                    <Paragraph Copyable Class="text-white" Style="margin-bottom: 7px; padding-left: 0"><b>Куратор:</b> @CurrentGroup?.Curator?.User?.Name</Paragraph>
+                </GridCol>
+            </GridRow>
+            <GridRow Gutter="16" Align="bottom" Justify="start">
+                <GridCol Span="12">
+                    <h5 class="text-white" style="margin-top: 10px">УЧАСТНИКИ ГРУППЫ [@Students.Count]</h5>
+                </GridCol>
+                <GridCol Span="12">
+                    <h5 class="text-white">СПИСОК МЕРОПРИЯТИЙ</h5>
+                </GridCol>
+            </GridRow>
+            <GridRow Gutter="16" Align="middle" Justify="start">
+                <GridCol Span="12">
+                    <div class="container-fluid bg-white rounded-3 overflow-auto" style="max-height: 400px; min-height: 400px">
+                        @if (Students.Count != 0)
+                        {
+                            @foreach (var student in Students)
+                            {
+                                <MentorsDiary.Web.Components.Displays.BoxCard>
+                                    <Body>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="text-label">Имя</div>
+                                                <div>@student.Name</div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="text-label">Дата рождения</div>
+                                                <div>@student.BirthDate?.ToString("d")</div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="text-label">Адрес</div>
+                                                <div>@student.Address</div>
+                                            </div>
+                                        </div>
+                                    </Body>
+                                    <ActionTemplate>
+                                        <Space Size="@("3")">
+                                            <SpaceItem>
+                                                <AntDesign.Button OnClickStopPropagation="true" Danger
+                                                                  Type="@ButtonType.Link"
+                                                                  Size="small" OnClick="async () => await RemoveStudentAsync(student)">
+                                                    <Icon Type="@IconType.Outline.Delete" />
+                                                </AntDesign.Button>
+                                            </SpaceItem>
+                                            <SpaceItem>
+                                                <AntDesign.Button OnClickStopPropagation="true"
+                                                                  Type="@ButtonType.Link"
+                                                                  Size="small" OnClick="() => UpdateStudentAsync(student)">
+                                                    <Icon Type="@IconType.Outline.Edit" />
+                                                </AntDesign.Button>
+                                            </SpaceItem>
+                                            <SpaceItem>
+                                                <AntDesign.Button OnClickStopPropagation="true"
+                                                                  Type="@ButtonType.Link"
+                                                                  Size="small" OnClick="() => ShowStudentPageAsync(student)">
+                                                    <Icon Type="@IconType.Outline.Search" />
+                                                </AntDesign.Button>
+                                            </SpaceItem>
+                                        </Space>
+                                    </ActionTemplate>
+                                </MentorsDiary.Web.Components.Displays.BoxCard>
+                            }
+                        }
+                        else
+                        {
+                            <EmptyPage Content="Список студентов пуст." />
+                        }
+                    </div>
+                </GridCol>
+                <GridCol Span="12">
+                    <div class="container-fluid bg-white rounded-3 overflow-auto" style="max-height: 400px; min-height: 400px">
+                        @if (GroupEvents.Count != 0)
+                        {
+                            @foreach (var groupEvent in GroupEvents)
+                            {
+                                <MentorsDiary.Web.Components.Displays.BoxCard>
+                                    <Body>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="text-label">Имя</div>
+                                                <div>@groupEvent.Event?.Name</div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="text-label">Количество участников</div>
+                                                <div>@groupEvent.CountParticipants</div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="text-label">Дата проведения</div>
+                                                <div>@groupEvent.Event?.DateEvent?.ToString("D")</div>
+                                            </div>
+                                        </div>
+                                    </Body>
+                                    <ActionTemplate>
+                                        <Space Size="@("3")">
+                                            <SpaceItem>
+                                                <AntDesign.Button OnClickStopPropagation="true" Danger
+                                                                  Type="@ButtonType.Link"
+                                                                  Size="small" OnClick="async () => await RemoveGroupEventAsync(groupEvent)">
+                                                    <Icon Type="@IconType.Outline.Delete" />
+                                                </AntDesign.Button>
+                                            </SpaceItem>
+                                            <SpaceItem>
+                                                <AntDesign.Button OnClickStopPropagation="true"
+                                                                  Type="@ButtonType.Link"
+                                                                  Size="small" OnClick="() => UpdateGroupEventAsync(groupEvent)">
+                                                    <Icon Type="@IconType.Outline.Edit" />
+                                                </AntDesign.Button>
+                                            </SpaceItem>
+                                            <SpaceItem>
+                                                <GroupEventPopover GroupEvent="groupEvent" />
+                                            </SpaceItem>
+                                        </Space>
+                                    </ActionTemplate>
+                                </MentorsDiary.Web.Components.Displays.BoxCard>
+                            }
+                        }
+                        else
+                        {
+                            <EmptyPage Content="Список мероприятий пуст." />
+                        }
+                    </div>
+                </GridCol>
+            </GridRow>
+            <GridRow Gutter="16" Style="margin-top: 10px" Align="middle" Justify="center">
+                <GridCol Span="12" Style="text-align: center">
+                    <InputFile OnChange="@LoadFiles"></InputFile>
+                    <button class="btn btn-secondary" style="margin-right: 2px; margin-left: 2px" @onclick="@CreateStudentAsync">Добавить</button>
+                </GridCol>
+                <GridCol Span="12" Style="text-align: center">
+                    <button class="btn btn-secondary" style="margin-right: 2px; margin-left: 2px" @onclick="@CreateGroupEventAsync">Добавить</button>
+                </GridCol>
+            </GridRow>
+            <GridRow Style="margin-top: 10px" Align="middle" Justify="center">
+                <GridCol Span="24">
+                    <hr style="margin-top: 0">
+                </GridCol>
+                <button type="button" style="margin-bottom: 1rem" class="btn btn-secondary" @onclick="DownloadExcelFile">Экспорт</button>
+            </GridRow>
+        </div>
+    </div>
+
+    <StudentData @bind-Student="_selectedStudent" BaseUri="@BaseUri" />
+
+</Loading>

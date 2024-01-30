@@ -1,0 +1,26 @@
+﻿<Microsoft.AspNetCore.Components.Web.PageTitle>@Title</Microsoft.AspNetCore.Components.Web.PageTitle>
+<div style="flex: 1 1 0%;display: flex;align-items: baseline; margin-bottom: 1.25rem;">
+    <div style="display: flex; align-items: flex-start; margin-right: .5rem; ">
+        <h1 style="font-size: 2rem;margin-bottom: 0;font-weight: 400;">@Title</h1> <div style="font-size: 13px; color: #888;">
+            <Loading Spinning="Loading" Size="@AntSizeLDSType.Small">@($"{(Loading ? "" : $"{Count:n0}")}")</Loading>
+        </div>
+    </div>
+    @if (ChildContent != null)
+    {
+        @ChildContent
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public int? Count { get; set; }
+
+    [Parameter]
+    public bool Loading { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

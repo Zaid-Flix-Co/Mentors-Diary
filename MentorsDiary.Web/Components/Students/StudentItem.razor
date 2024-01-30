@@ -1,0 +1,78 @@
+﻿@page "/student/{StudentId:int}/{GroupId:int}"
+
+<br />
+
+<Loading Spinning="@_isLoading">
+    <div class="container-fluid">
+        <Card Title=@("Добавление студента")>
+            <Form Model="@_student">
+                <GridRow Gutter="32">
+                    <GridCol Span="8">
+                        @if (_avatar == null)
+                        {
+                            <Avatar Size="10rem">@_student?.Name</Avatar>
+                        }
+                        else
+                        {
+                            <Avatar Size="10rem" Src="@_avatar" />
+                        }
+                        <FormItem>
+                            <div class="custom-file">
+                                <InputFile OnChange="OnInputFileChange" id="inputFileField" class="custom-file-input" />
+                                <span class="custom-file" for="inputFileField"></span>
+                            </div>
+                        </FormItem>
+                    </GridCol>
+                    <GridCol Span="12">
+                        <FormItem Label="ФИО">
+                            <Input @bind-Value="@context.Name" />
+                        </FormItem>
+                        <FormItem Label="Телефон">
+                            <Input @bind-Value="@context.Phone" />
+                        </FormItem>
+                        <FormItem Label="Email">
+                            <Input @bind-Value="@context.Email" />
+                        </FormItem>
+                        <FormItem Label="Адрес">
+                            <Input @bind-Value="@context.Address" />
+                        </FormItem>
+                        <FormItem Label="Дата рождения">
+                            <DatePicker @bind-Value="@context.BirthDate" TValue="DateTime?" Picker="@DatePickerType.Date" />
+                        </FormItem>
+                        <FormItem>
+                            <AntDesign.Button OnClick="() => NavigationManager.NavigateTo(NavigateToUri)" Type="AntDesign.ButtonType.Primary">
+                                Назад
+                            </AntDesign.Button>
+                            <AntDesign.Button OnClick="SaveAsync" Type="AntDesign.ButtonType.Primary" HtmlType="submit">
+                                Сохранить
+                            </AntDesign.Button>
+                        </FormItem>
+                    </GridCol>
+                    @if (_parents.Count > 1)
+                    {
+                        <GridCol Span="12">
+                            <FormItem Label="ФИО матери">
+                                <Input @bind-Value="@_parents[0]!.Name" />
+                            </FormItem>
+                            <FormItem Label="Телефон матери">
+                                <Input @bind-Value="@_parents[0]!.Phone" />
+                            </FormItem>
+                            <FormItem Label="Сведения о месте работы матери">
+                                <Input @bind-Value="@_parents[0]!.WorkName" />
+                            </FormItem>
+                            <FormItem Label="ФИО отца">
+                                <Input @bind-Value="@_parents[1]!.Name" />
+                            </FormItem>
+                            <FormItem Label="Телефон отца">
+                                <Input @bind-Value="@_parents[1]!.Phone" />
+                            </FormItem>
+                            <FormItem Label="Сведения о месте работы отца">
+                                <Input @bind-Value="@_parents[1]!.WorkName" />
+                            </FormItem>
+                        </GridCol>
+                    }
+                </GridRow>
+            </Form>
+        </Card>
+    </div>
+</Loading>

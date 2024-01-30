@@ -1,0 +1,37 @@
+﻿@page "/login"
+
+<br />
+
+<div class="container-fluid">
+    <Loading Spinning="_isLoading">
+        <AuthorizeView Context="account">
+            <NotAuthorized>
+                <Card Title=@("ВХОД В СИСТЕМУ")>
+                    <Form Model="LoginFormModel" Context="login">
+                        <Row Gutter="24">
+                            <GridCol Span="24">
+                                <FormItem Label="Логин">
+                                    <Input @bind-Value="LoginFormModel.Username"></Input>
+                                </FormItem>
+                                <FormItem Label="Пароль">
+                                    <Input Type="password" @bind-Value="LoginFormModel.Password"></Input>
+                                </FormItem>
+                            </GridCol>
+                        </Row>
+                        <Row Gutter="24" Justify="end">
+                            <GridCol>
+                                <FormItem>
+                                    <button type="button" class="btn btn-primary" @onclick="TryLogin">Войти</button>
+                                </FormItem>
+                            </GridCol>
+                        </Row>
+                    </Form>
+                </Card>
+            </NotAuthorized>
+            <Authorizing>
+                <Spin />
+                Идет процесс авторизации...
+            </Authorizing>
+        </AuthorizeView>
+    </Loading>
+</div>

@@ -1,0 +1,49 @@
+﻿@page "/event/{EventId:int}"
+
+<br />
+
+<Loading Spinning="_isLoading">
+    <div class="container-fluid">
+        <Card Title=@("Добавление события")>
+            <Form Model="@_event">
+                <Row Gutter="24">
+                    <GridCol Span="8">
+                        @if (_avatar == null)
+                        {
+                            <Avatar Size="10rem">@_event.Name</Avatar>
+                        }
+                        else
+                        {
+                            <Avatar Size="10rem" Src="@_avatar" />
+                        }
+                        <FormItem>
+                            <div class="custom-file">
+                                <InputFile OnChange="OnInputFileChange" id="inputFileField" class="custom-file-input" />
+                                <span class="custom-file" for="inputFileField"></span>
+                            </div>
+                        </FormItem>
+                    </GridCol>
+                    <GridCol Span="16">
+                        <FormItem Label="Наименование">
+                            <Input @bind-Value="@context.Name" />
+                        </FormItem>
+                        <FormItem Label="Описание">
+                            <TextArea @bind-Value="@context.Comment"></TextArea>
+                        </FormItem>
+                        <FormItem Label="Дата проведения">
+                            <DatePicker TValue="DateTime?" @bind-Value="@context.DateEvent" Picker="@DatePickerType.Date" />
+                        </FormItem>
+                        <FormItem>
+                            <AntDesign.Button OnClick="() => NavigationManager.NavigateTo(NavigateToUri)" Type="AntDesign.ButtonType.Primary">
+                                Назад
+                            </AntDesign.Button>
+                            <AntDesign.Button OnClick="SaveAsync" Type="AntDesign.ButtonType.Primary" HtmlType="submit">
+                                Сохранить
+                            </AntDesign.Button>
+                        </FormItem>
+                    </GridCol>
+                </Row>
+            </Form>
+        </Card>
+    </div>
+</Loading>

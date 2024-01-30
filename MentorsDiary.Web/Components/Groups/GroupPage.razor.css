@@ -1,0 +1,103 @@
+﻿.btn-modal {
+    cursor: pointer;
+    padding: 1rem 3rem;
+    color: #fff;
+    text-decoration: none;
+    background-color: #83bec5;
+    transition: all 0.3s ease-out;
+}
+
+#modal-block {
+    position: fixed;
+    top: 0;
+    left: -50vw;
+    transition: all .5s;
+    z-index: 9;
+}
+
+#modal-block:target {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+}
+
+.close-block {
+    display: flex;
+    position: absolute;
+    top: 25%;
+    right: 25%;
+    padding: .5em;
+    background-color: #fff;
+    color: #527c82;
+    text-decoration: none;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.BlueCardStudent {
+    width: 1130px;
+    height: 600px;
+    float: right;
+    margin-right: -8px;
+    margin-top: 150px;
+    border-radius: 10px 0px 0px 10px;
+    background-color: darkblue;
+    z-index: 1;
+}
+
+.WhiteCard {
+    background-color: honeydew;
+    border-radius: 10px;
+    z-index: 0;
+    width: 1080px;
+    height: 580px;
+    margin: 10px 50px 10px 10px;
+    display: grid;
+    grid-template-columns: 360px 590px; /* Размеры столбцов */
+    grid-template-rows: 630px 50px; /* Размеры строк */
+    grid-gap: 40px;
+}
+
+.CardPhoto {
+    margin: 50px 0px 0px 50px;
+    width: 360px;
+    height: 480px;
+    float: left;
+    grid-row: span 2;
+}
+
+.CardTitle {
+    float: left;
+    margin: 50px 0px 0px 50px;
+    letter-spacing: 1.5px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.CardText1 {
+    margin-left: 50px;
+    margin-top: 120px;
+    font-size: 30px;
+    letter-spacing: 1px;
+}
+
+.CardText {
+    margin-left: 50px;
+    margin-top: -5px;
+    font-size: 30px;
+    letter-spacing: 1px;
+    z-index: 2;
+}
+
+.Print {
+    transform: rotate(-30deg);
+    width: 180px;
+    height: 180px;
+    margin-top: -285px;
+    margin-left: -125px;
+    z-index: 1;
+}

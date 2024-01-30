@@ -1,0 +1,26 @@
+﻿@using MentorsDiary.Application.Entities.GroupEvents.Domains
+
+<Popover Id="@GroupEvent.Id.ToString()" OnVisibleChange="OnVisibleChange" Visible="_visible" Title="@GroupEvent.Event?.Name" Trigger="@(new[] { Trigger.Focus })">
+    <ContentTemplate>
+        <GroupEventData GroupEvent="GroupEvent" @bind-Visible="_visible" />
+    </ContentTemplate>
+    <ChildContent>
+        <AntDesign.Button Id="@GroupEvent.Id.ToString()" Type="@ButtonType.Link"
+                          Size="small">
+            <Icon Type="@IconType.Outline.Search" />
+        </AntDesign.Button>
+    </ChildContent>
+</Popover>
+
+@code
+{
+    [Parameter]
+    public GroupEvent GroupEvent { get; set; }
+
+    private bool _visible;
+
+    private void OnVisibleChange(bool visible)
+    {
+        _visible = visible;
+    }
+}

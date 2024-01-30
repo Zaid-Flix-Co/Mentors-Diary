@@ -1,0 +1,26 @@
+﻿<div class="row">
+    @if (_avatar == null)
+    {
+        <div class="col">
+            <img class="img-thumbnail" src="../img/no-img.jpg" alt="">
+        </div>
+    }
+    else
+    {
+        <div class="col">
+            <img class="img-thumbnail" src="@_avatar" alt="">
+        </div>
+    }
+    <div class="col">
+        <div class="text-label">Номер группы</div>
+        <div>@Group.Name</div>
+    </div>
+    <div class="col">
+        <div class="text-label">Подразделение</div>
+        <div>@Group.Division?.Name</div>
+    </div>
+    <div class="col">
+        <div class="text-label">Куратор</div>
+        <div>@Group.Curator?.Name</div>
+    </div>
+</div>

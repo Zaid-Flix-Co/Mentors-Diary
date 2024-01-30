@@ -1,0 +1,229 @@
+﻿<div id="modal-block">
+    <div class="BackWhite">
+        <div class="VisibleData">
+            <div>
+                <p>Просмотр студента</p>
+            </div>
+
+            <div class="close-button" @onclick="() => NavigationManager.NavigateTo(BaseUri!, true)">
+                <p>X</p>
+            </div>
+            @* todo: Fix adaptive cap of the modal window *@
+        </div>
+
+        <div class="Line"></div>
+
+        <div class="BlueCardStudent">
+            <div class="WhiteCard">
+                <div>
+                    <img class="CardPhoto" src="@_avatar" alt="" />
+                </div>
+                <div>
+                    <p class="CardTitle">СТУДЕНЧЕСКИЙ БИЛЕТ</p>
+                    <div>
+                        <p class="CardText1">ФИО:</p>
+                        <p class="DataStudent1">
+                            @if (Student?.Name != null)
+                            {
+                                @Student.Name
+                            }
+                            else
+                            {
+                                <span>[Нет данных]</span>
+                            }
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="CardText">Дата рождения:</p>
+                        <p class="DataStudent2">
+                            @if (Student.BirthDate?.ToString("d") != null)
+                            {
+                                @Student.BirthDate?.ToString("d")
+                            }
+                            else
+                            {
+                                <span>[Нет данных]</span>
+                            }
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="CardText">Подразделение:</p>
+                        <p class="DataStudent3">
+                            @if (Student?.Group != null)
+                            {
+                                @if (Student?.Group.Division?.Name != null)
+                                {
+                                    @Student?.Group.Division?.Name
+                                }
+                                else
+                                {
+                                    <span>[Нет данных]</span>
+                                }
+                            }
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="CardText">Группа:</p>
+                        <p class="DataStudent4">
+                            @if (Student?.Group != null)
+                            {
+                                @if (Student?.Group.Name != null)
+                                {
+                                    @Student?.Group.Name
+                                }
+                                else
+                                {
+                                    <span>[Нет данных]</span>
+                                }
+                            }
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="CardText">Телефон:</p>
+                        <p class="DataStudent5">
+                            @if (@Student.Phone != null)
+                            {
+                                @Student.Phone
+                            }
+                            else
+                            {
+                                <span>[Нет данных]</span>
+                            }
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="CardText">Адрес:</p>
+                        <p class="DataStudent6">
+                            @if (Student.Address != null)
+                            {
+                                @Student.Address
+                            }
+                            else
+                            {
+                                <span>[Нет данных]</span>
+                            }
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="CardText">Email:</p>
+                        <p class="DataStudent7">
+                            @if (Student.Email != null)
+                            {
+                                @Student.Email
+                            }
+                            else
+                            {
+                                <span>[Нет данных]</span>
+                            }
+                        </p>
+
+                        <img class="Print" src="~/print-kit.png" alt="" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="BlueCardParents">
+                <div class="WhiteCardParents">
+                    <div class="CardTitleParent"><p>СВЕДЕНИЯ О РОДИТЕЛЯХ</p></div>
+
+                    @if (_parents is {Count: > 0 })
+                    {
+                        <div class="MotherCard">
+                            <div class="MotherColumn1"><div class="MotherTitle"><p>МАТЬ</p></div></div>
+
+                            <div class="MotherColumn2">
+                                <p class="MotherInfo1">ФИО:</p>
+                                <p class="ParentData1">
+                                    @if (_parents[0]!.Name != null)
+                                    {
+                                        @_parents[0]!.Name
+                                    }
+                                    else
+                                    {
+                                        <span>[Нет данных]</span>
+                                    }
+                                </p>
+
+                                <p class="MotherInfo">Телефон:</p>
+                                <p class="ParentData2">
+                                    @if (_parents[0]!.Phone != null)
+                                    {
+                                        @_parents[0]!.Phone
+                                    }
+                                    else
+                                    {
+                                        <span>[Нет данных]</span>
+                                    }
+                                </p>
+
+                                <p class="MotherInfo MotherInfo3">Место работы:</p>
+                                <p class="ParentData3">
+                                    @if (_parents[0]!.WorkName != null)
+                                    {
+                                        @_parents[0]!.WorkName
+                                    }
+                                    else
+                                    {
+                                        <span>[Нет данных]</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="FatherCard">
+                            <div class="FatherColumn1">
+                                <div class="FatherTitle">
+                                    <p>ОТЕЦ</p>
+                                </div>
+                            </div>
+
+                            <div class="FatherColumn2">
+                                <p class="FatherInfo1">ФИО:</p>
+                                <p class="ParentData4">
+                                    @if (_parents[1]!.Name != null)
+                                    {
+                                        @_parents[1]!.Name
+                                    }
+                                    else
+                                    {
+                                        <span>[Нет данных]</span>
+                                    }
+                                </p>
+
+                                <p class="FatherInfo">Телефон:</p>
+                                <p class="ParentData5">
+                                    @if (_parents[1]!.Phone != null)
+                                    {
+                                        @_parents[1]!.Phone
+                                    }
+                                    else
+                                    {
+                                        <span>[Нет данных]</span>
+                                    }
+                                </p>
+
+                                <p class="FatherInfo FatherInfo3">Место работы:</p>
+                                <p class="ParentData6">
+                                    @if (_parents[1]!.WorkName != null)
+                                    {
+                                        @_parents[1]!.WorkName
+                                    }
+                                    else
+                                    {
+                                        <span>[Нет данных]</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

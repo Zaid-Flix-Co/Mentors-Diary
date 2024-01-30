@@ -1,0 +1,118 @@
+﻿@page "/group"
+
+<AuthorizeView Context="account" Roles="Administrator, DeputyDirector">
+    <Authorized>
+        <br />
+        <Loading Spinning="@_isLoading">
+            <div class="border border-primary border-1 rounded-2 p-2">
+                <MentorsDiary.Web.Components.Displays.PageTitle Title="Группы" Count="@Groups?.Count" Loading="_isLoading">
+                    <AntDesign.Button OnClickStopPropagation="true"
+                                      Class="mb-2"
+                                      Type="@ButtonType.Link"
+                                      Icon="plus"
+                                      Size="small"
+                                      OnClick="async () => await CreateGroupAsync()">
+                        Добавить
+                    </AntDesign.Button>
+
+                    <BodySearchBar OnSelectedItemChangedHandler="UpdateList"
+                                   OnSearchItemChangedHandler="SearchList!"
+                                   TValue="Division"
+                                   TService="DivisionService">
+
+                    </BodySearchBar>
+                </MentorsDiary.Web.Components.Displays.PageTitle>
+
+                @foreach (var group in Groups!)
+                {
+                    <MentorsDiary.Web.Components.Displays.BoxCard>
+                        <Body>
+                            <GroupData Group="@group" />
+                        </Body>
+                        <ActionTemplate>
+                            <Space Size="@("3")">
+                                <SpaceItem>
+                                    <AntDesign.Button OnClickStopPropagation="true" Danger
+                                                      Type="@ButtonType.Link"
+                                                      Size="small" OnClick="async () => await RemoveAsync(group)">
+                                        <Icon Type="@IconType.Outline.Delete" />
+                                    </AntDesign.Button>
+                                </SpaceItem>
+                                <SpaceItem>
+                                    <AntDesign.Button OnClickStopPropagation="true"
+                                                      Type="@ButtonType.Link"
+                                                      Size="small" OnClick="() => UpdateAsync(group)">
+                                        <Icon Type="@IconType.Outline.Edit" />
+                                    </AntDesign.Button>
+                                </SpaceItem>
+                                <SpaceItem>
+                                    <AntDesign.Button OnClickStopPropagation="true"
+                                                      Type="@ButtonType.Link"
+                                                      Size="small" OnClick="() => ShowGroupPageAsync(group)">
+                                        <Icon Type="@IconType.Outline.Search" />
+                                    </AntDesign.Button>
+                                </SpaceItem>
+                            </Space>
+                        </ActionTemplate>
+                    </MentorsDiary.Web.Components.Displays.BoxCard>
+                }
+            </div>
+        </Loading>
+    </Authorized>
+    <NotAuthorized>
+        <AuthorizeView Roles="Curator">
+            <Authorized>
+                <br />
+                <Loading Spinning="@_isLoading">
+                    <div class="border border-primary border-1 rounded-2 p-2">
+                        <MentorsDiary.Web.Components.Displays.PageTitle Title="Группы" Count="@Groups?.Count" Loading="_isLoading">
+
+                            <BodySearchBar OnSelectedItemChangedHandler="UpdateList"
+                                           OnSearchItemChangedHandler="SearchList!"
+                                           TValue="Division"
+                                           TService="DivisionService">
+
+                            </BodySearchBar>
+                        </MentorsDiary.Web.Components.Displays.PageTitle>
+
+                        @foreach (var group in Groups!)
+                        {
+                            <MentorsDiary.Web.Components.Displays.BoxCard>
+                                <Body>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="text-label">Номер группы</div>
+                                            <div>@group.Name</div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="text-label">Подразделение</div>
+                                            <div>@group.Division?.Name</div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="text-label">Куратор</div>
+                                            <div>@group.Curator?.Name</div>
+                                        </div>
+                                    </div>
+                                </Body>
+                                <ActionTemplate>
+                                    <Space Size="@("3")">
+                                        <SpaceItem>
+                                            <AntDesign.Button OnClickStopPropagation="true"
+                                                              Type="@ButtonType.Link"
+                                                              Size="small" OnClick="() => ShowGroupPageAsync(group)">
+                                                <Icon Type="@IconType.Outline.Search" />
+                                            </AntDesign.Button>
+                                        </SpaceItem>
+                                    </Space>
+                                </ActionTemplate>
+                            </MentorsDiary.Web.Components.Displays.BoxCard>
+                        }
+                    </div>
+                </Loading>
+            </Authorized>
+            <NotAuthorized>
+                Доступ ограничен.
+            </NotAuthorized>
+        </AuthorizeView>
+    </NotAuthorized>
+</AuthorizeView>

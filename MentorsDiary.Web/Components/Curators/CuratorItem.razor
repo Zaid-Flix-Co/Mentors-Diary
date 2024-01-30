@@ -1,0 +1,110 @@
+﻿@page "/curator/{CuratorId:int}"
+
+<br />
+
+<Loading Spinning="_isLoading">
+    <AuthorizeView Roles="Administrator" Context="first">
+        <Authorized>
+            <div class="container-fluid">
+                <Card Title=@("Добавление куратора")>
+                    <Form Model="@_curator">
+                        <Row Gutter="24">
+                            <GridCol Span="8">
+                                @if (_avatar == null)
+                                {
+                                    <Avatar Size="10rem">@_curator.User.Name</Avatar>
+                                }
+                                else
+                                {
+                                    <Avatar Size="10rem" Src="@_avatar" />
+                                }
+                                <FormItem>
+                                    <div class="custom-file">
+                                        <InputFile OnChange="OnInputFileChange" id="inputFileField" class="custom-file-input" />
+                                        <span class="custom-file" for="inputFileField"></span>
+                                    </div>
+                                </FormItem>
+                            </GridCol>
+                            <GridCol Span="16">
+                                <FormItem Label="ФИО">
+                                    <Input @bind-Value="@context.User!.Name" />
+                                </FormItem>
+                                <FormItem Label="Подразделение">
+                                    <Select Mode="default"
+                                            DataSource="@Divisions"
+                                            TItem="Division"
+                                            TItemValue="int?"
+                                            @bind-Value="@context.User!.DivisionId"
+                                            LabelName="@nameof(Division.Name)"
+                                            ValueName="@nameof(Division.Id)"
+                                            IgnoreItemChanges="false"
+                                            OnSelectedItemChanged="OnSelectedItemChangedHandler">
+                                    </Select>
+                                </FormItem>
+                                <FormItem Label="Телефон">
+                                    <Input @bind-Value="@context.User!.Phone" />
+                                </FormItem>
+                                <FormItem Label="Email">
+                                    <Input @bind-Value="@context.User!.Email" />
+                                </FormItem>
+                                <FormItem Label="Пароль">
+                                    <Input @bind-Value="@context.User!.Password" />
+                                </FormItem>
+                                <FormItem>
+                                    <AntDesign.Button OnClick="() => NavigationManager.NavigateTo(NavigateToUri)" Type="AntDesign.ButtonType.Primary">
+                                        Назад
+                                    </AntDesign.Button>
+                                    <AntDesign.Button OnClick="SaveAsync" Type="AntDesign.ButtonType.Primary" HtmlType="submit">
+                                        Сохранить
+                                    </AntDesign.Button>
+                                </FormItem>
+                            </GridCol>
+                        </Row>
+                    </Form>
+                </Card>
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <AuthorizeView Roles="DeputyDirector" Context="second">
+                <Authorized>
+                    <div class="container-fluid">
+                        <Card Title=@("Добавление куратора")>
+                            <Form Model="@_curator">
+                                <Row Gutter="24">
+                                    <GridCol Span="24">
+                                        <FormItem Label="ФИО">
+                                            <Input @bind-Value="@context.User!.Name" />
+                                        </FormItem>
+                                        <FormItem Label="Подразделение">
+                                            <span>@CurrentUser.Division?.Name</span>
+                                        </FormItem>
+                                        <FormItem Label="Телефон">
+                                            <Input @bind-Value="@context.User!.Phone" />
+                                        </FormItem>
+                                        <FormItem Label="Email">
+                                            <Input @bind-Value="@context.User!.Email" />
+                                        </FormItem>
+                                        <FormItem Label="Пароль">
+                                            <Input @bind-Value="@context.User!.Password" />
+                                        </FormItem>
+                                        <FormItem>
+                                            <AntDesign.Button OnClick="() => NavigationManager.NavigateTo(NavigateToUri)" Type="AntDesign.ButtonType.Primary">
+                                                Назад
+                                            </AntDesign.Button>
+                                            <AntDesign.Button OnClick="SaveAsync" Type="AntDesign.ButtonType.Primary" HtmlType="submit">
+                                                Сохранить
+                                            </AntDesign.Button>
+                                        </FormItem>
+                                    </GridCol>
+                                </Row>
+                            </Form>
+                        </Card>
+                    </div>
+                </Authorized>
+                <NotAuthorized>
+                    Доступ ограничен.
+                </NotAuthorized>
+            </AuthorizeView>
+        </NotAuthorized>
+    </AuthorizeView>
+</Loading>
