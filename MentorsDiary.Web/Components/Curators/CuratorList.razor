@@ -4,7 +4,7 @@
     <Authorized>
         <br />
         <div class="border border-primary border-1 rounded-2 p-2">
-            <MentorsDiary.Web.Components.Displays.PageTitle Title="Кураторы" Count="@Curators?.Count" Loading="_isLoading">
+            <PageTitleBox Title="Кураторы" Count="@Curators?.Count" Loading="_isLoading">
 
                 <AntDesign.Button OnClickStopPropagation="true"
                                   Class="mb-2"
@@ -20,7 +20,7 @@
                                TValue="Division"
                                TService="DivisionService" />
 
-            </MentorsDiary.Web.Components.Displays.PageTitle>
+            </PageTitleBox>
 
             @if (Curators != null)
             {

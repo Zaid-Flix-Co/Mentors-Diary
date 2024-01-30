@@ -124,14 +124,14 @@ public partial class CuratorList
 
         switch (CurrentUser.Role)
         {
-            case EnumRoles.Administrator:
-                Users = (await UserService.GetAllAsync() ?? Array.Empty<User>()).Where(u => u.Role == EnumRoles.Curator).ToList();
+            case Roles.Administrator:
+                Users = (await UserService.GetAllAsync() ?? Array.Empty<User>()).Where(u => u.Role == Roles.Curator).ToList();
 
                 Curators = (await CuratorService.GetAllAsync() ??
                             Array.Empty<Curator>()).Where(c => Users.Any(u => u.Id == c.UserId)).ToList();
                 break;
-            case EnumRoles.DeputyDirector:
-                Users = (await UserService.GetAllAsync() ?? Array.Empty<User>()).Where(u => u.Role == EnumRoles.Curator && u.DivisionId == CurrentUser.DivisionId)
+            case Roles.DeputyDirector:
+                Users = (await UserService.GetAllAsync() ?? Array.Empty<User>()).Where(u => u.Role == Roles.Curator && u.DivisionId == CurrentUser.DivisionId)
                     .ToList();
 
                 Curators = (await CuratorService.GetAllAsync() ??
@@ -156,14 +156,14 @@ public partial class CuratorList
 
         switch (CurrentUser.Role)
         {
-            case EnumRoles.Administrator:
+            case Roles.Administrator:
                 responseUserCreate = await UserService.CreateAsync(new User
                 {
                     DateCreated = DateTime.Now,
                     UserCreated = CurrentUser.Name
                 });
                 break;
-            case EnumRoles.DeputyDirector:
+            case Roles.DeputyDirector:
                 responseUserCreate = await UserService.CreateAsync(new User
                 {
                     DivisionId = CurrentUser.DivisionId,
@@ -212,7 +212,7 @@ public partial class CuratorList
                     new FilterParams
                     {
                         ColumnName = "DivisionId",
-                        FilterOption = EnumFilterOptions.Contains,
+                        FilterOption = FilterOptions.Contains,
                         FilterValue = division.Id.ToString()
                     }) ?? Array.Empty<User>()).ToList();
             }

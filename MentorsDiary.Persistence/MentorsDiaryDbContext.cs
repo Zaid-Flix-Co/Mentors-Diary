@@ -122,21 +122,21 @@ public class MentorsDiaryDbContext : DbContext, IMentorsDiaryContext
         var userProvider = Empty;
         var httpContextAccessor = scope.ServiceProvider.GetRequiredService<IHttpContextAccessor>();
 
-        var changeType = EnumEntityChangeType.None;
+        var changeType = EntityChangeTypes.None;
         switch (entity.State)
         {
             case EntityState.Detached:
             case EntityState.Unchanged:
-                changeType = EnumEntityChangeType.None;
+                changeType = EntityChangeTypes.None;
                 break;
             case EntityState.Added:
-                changeType = EnumEntityChangeType.Insert;
+                changeType = EntityChangeTypes.Insert;
                 break;
             case EntityState.Modified:
-                changeType = EnumEntityChangeType.Update;
+                changeType = EntityChangeTypes.Update;
                 break;
             case EntityState.Deleted:
-                changeType = EnumEntityChangeType.Delete;
+                changeType = EntityChangeTypes.Delete;
                 break;
         }
 
@@ -148,7 +148,7 @@ public class MentorsDiaryDbContext : DbContext, IMentorsDiaryContext
         var entityChangeLog = new EntityChangelog
         {
             ChangeTime = DateTime.Now,
-            EntityChangeType = changeType,
+            EntityChangeTypes = changeType,
             EntityId = string.Join(',', entity.Metadata.FindPrimaryKey()?.Properties.Select(prop => prop.PropertyInfo?.GetValue(entity.Entity))!),
             EntityName = entity.Metadata.ClrType.Name,
             UserDescription = userDescription,

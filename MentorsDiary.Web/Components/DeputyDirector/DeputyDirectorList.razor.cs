@@ -88,7 +88,7 @@ public partial class DeputyDirectorList
         _isLoading = true;
         StateHasChanged();
 
-        Users = (await UserService.GetAllAsync() ?? Array.Empty<User>()).Where(u => u.Role == EnumRoles.DeputyDirector)
+        Users = (await UserService.GetAllAsync() ?? Array.Empty<User>()).Where(u => u.Role == Roles.DeputyDirector)
             .ToList();
 
         _isLoading = false;
@@ -132,9 +132,9 @@ public partial class DeputyDirectorList
                     new FilterParams
                     {
                         ColumnName = "DivisionId",
-                        FilterOption = EnumFilterOptions.Contains,
+                        FilterOption = FilterOptions.Contains,
                         FilterValue = division.Id.ToString()
-                    }) ?? Array.Empty<User>()).Where(u => u.Role == EnumRoles.DeputyDirector).ToList();
+                    }) ?? Array.Empty<User>()).Where(u => u.Role == Roles.DeputyDirector).ToList();
             }
 
             _isLoading = false;
@@ -155,7 +155,7 @@ public partial class DeputyDirectorList
             _isLoading = true;
             StateHasChanged();
                 
-            Users = (await UserService.GetAllByFilterAsync(query!) ?? Array.Empty<User>()).Where(u => u.Role == EnumRoles.DeputyDirector).ToList();
+            Users = (await UserService.GetAllByFilterAsync(query!) ?? Array.Empty<User>()).Where(u => u.Role == Roles.DeputyDirector).ToList();
 
             _isLoading = false;
             StateHasChanged();
@@ -227,7 +227,7 @@ public partial class DeputyDirectorList
             var numberOfTheDeputyDirector = 0;
             foreach (var user in Users!)
             {
-                if (user.Role == EnumRoles.DeputyDirector)
+                if (user.Role == Roles.DeputyDirector)
                 {
                     workSheetDataDeputyDirectors.Cells[startRowId, 2].Value = user.Name;
                     workSheetDataDeputyDirectors.Cells[startRowId, 3].Value = user.Division.Name;

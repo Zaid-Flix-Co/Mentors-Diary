@@ -29,7 +29,7 @@ public class EntityChangelog
     /// Тип изменения сущности.
     /// </summary>
     /// <value>The type of the entity change.</value>
-    public EnumEntityChangeType EntityChangeType { get; set; }
+    public EntityChangeTypes EntityChangeTypes { get; set; }
 
     /// <summary>
     /// Время изменения.

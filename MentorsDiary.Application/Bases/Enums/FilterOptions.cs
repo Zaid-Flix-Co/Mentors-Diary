@@ -1,9 +1,9 @@
 ﻿namespace MentorsDiary.Application.Bases.Enums;
 
 /// <summary>
-/// Enum EnumFilterOptions
+/// Enum FilterOptions
 /// </summary>
-public enum EnumFilterOptions
+public enum FilterOptions
 {
     /// <summary>
     /// The starts with

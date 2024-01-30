@@ -86,7 +86,7 @@ public partial class GroupEventData
         _students = (await GroupEventStudentService.GetAllByFilterAsync(new FilterParams
         {
             ColumnName = "GroupEventId",
-            FilterOption = EnumFilterOptions.Contains,
+            FilterOption = FilterOptions.Contains,
             FilterValue = GroupEvent.Id.ToString()
         }) ?? Array.Empty<GroupEventStudent>()).Select(s => s.Student).ToList()!;
 

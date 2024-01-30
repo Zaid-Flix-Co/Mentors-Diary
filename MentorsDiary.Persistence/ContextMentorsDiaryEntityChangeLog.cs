@@ -65,9 +65,9 @@ public class ContextMentorsDiaryEntityChangeLog : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<EntityChangelog>()
-            .Property(p => p.EntityChangeType)
-            .HasDefaultValue(EnumEntityChangeType.None)
-            .HasConversion(new EnumToNumberConverter<EnumEntityChangeType, int>());
+            .Property(p => p.EntityChangeTypes)
+            .HasDefaultValue(EntityChangeTypes.None)
+            .HasConversion(new EnumToNumberConverter<EntityChangeTypes, int>());
 
         modelBuilder.Entity<EntityChangelog>().HasIndex(h => h.Id);
         modelBuilder.Entity<EntityPropertyChangeLog>().HasIndex(h => h.Id);

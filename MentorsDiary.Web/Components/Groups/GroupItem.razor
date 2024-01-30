@@ -2,6 +2,8 @@
 
 <br />
 
+<PageTitle>Добавление группы</PageTitle>
+
 <Loading Spinning="_isLoading">
     <AuthorizeView Roles="Administrator, Curator" Context="first">
         <Authorized>
@@ -10,14 +12,7 @@
                     <Form Model="@_group">
                         <Row Gutter="24">
                             <GridCol Span="8">
-                                @if (_avatar == null)
-                                {
-                                    <Avatar Size="10rem">@_group?.Name</Avatar>
-                                }
-                                else
-                                {
-                                    <Avatar Size="10rem" Src="@_avatar" />
-                                }
+                                <AvatarBox Source="@_avatar" Label="@_group.Name"></AvatarBox>
                                 <FormItem>
                                     <div class="custom-file">
                                         <InputFile OnChange="OnInputFileChange" id="inputFileField" class="custom-file-input" />
@@ -37,6 +32,7 @@
                                             @bind-Value="@context.DivisionId"
                                             LabelName="@nameof(Division.Name)"
                                             ValueName="@nameof(Division.Id)"
+                                            EnableSearch
                                             IgnoreItemChanges="false">
                                     </Select>
                                 </FormItem>
@@ -48,6 +44,7 @@
                                             @bind-Value="@context.CuratorId"
                                             LabelName="@nameof(Curator.Name)"
                                             ValueName="@nameof(Curator.Id)"
+                                            EnableSearch
                                             IgnoreItemChanges="false">
                                     </Select>
                                 </FormItem>
@@ -87,6 +84,7 @@
                                                     @bind-Value="@context.CuratorId"
                                                     LabelName="@nameof(Curator.Name)"
                                                     ValueName="@nameof(Curator.Id)"
+                                                    EnableSearch
                                                     IgnoreItemChanges="false">
                                             </Select>
                                         </FormItem>

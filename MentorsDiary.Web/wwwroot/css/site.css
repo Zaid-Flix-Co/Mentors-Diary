@@ -317,13 +317,12 @@ a, .btn-link {
     font-size: 18px;
 }
 
-    .ScholarshipAmount:hover {
-        transform: scale(1.06);
-        border-color: rgb(0, 0, 156);
-    }
+.ScholarshipAmount:hover {
+    transform: scale(1.06);
+    border-color: rgb(0, 0, 156);
+}
 
 .DocImg {
-    width: 70px;
     height: 70px;
     padding-top: 25px;
 }
