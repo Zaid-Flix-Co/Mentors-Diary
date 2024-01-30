@@ -142,7 +142,7 @@ public partial class GroupList
             if (division.Name != null)
             {
                 Groups = (await GroupService.GetAllByFilterAsync(
-                    new FilterParams()
+                    new FilterParams
                     {
                         ColumnName = "DivisionId",
                         FilterOption = FilterOptions.Contains,
@@ -175,6 +175,9 @@ public partial class GroupList
 
     private async Task RemoveAsync(Group group)
     {
+        _isLoading = true;
+        StateHasChanged();
+
         var response = await GroupService.DeleteAsync(group.Id);
 
         if (response.IsSuccessStatusCode)
@@ -184,7 +187,8 @@ public partial class GroupList
 
         await GetListAsync();
 
-        NavigationManager.NavigateTo($"/{NavigateToUri}", true);
+        _isLoading = false;
+        StateHasChanged();
     }
 
     private void UpdateAsync(IHaveId group)
