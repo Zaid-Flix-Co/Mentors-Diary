@@ -1,5 +1,6 @@
 using MentorsDiary.API.Helpers;
 using MentorsDiary.Application.DependencyInjection;
+using MentorsDiary.Persistence.DependencyInjection;
 #if RELEASE
 using MentorsDiary.Persistence.DependencyInjection;
 #endif
