@@ -5,16 +5,8 @@ using Microsoft.AspNetCore.Components.Authorization;
 
 namespace MentorsDiary.Web.DependencyInjection;
 
-/// <summary>
-/// Class WebServiceCollectionExtensions.
-/// </summary>
 public static class WebServiceCollectionExtensions
 {
-    /// <summary>
-    /// Adds the web collection.
-    /// </summary>
-    /// <param name="serviceCollection">The service collection.</param>
-    /// <returns>IServiceCollection.</returns>
     public static IServiceCollection AddWebCollection(this IServiceCollection serviceCollection)
     {
         #region ПОДКЛЮЧЕНИЕ СЕРВИСОВ
@@ -47,7 +39,7 @@ public static class WebServiceCollectionExtensions
         
         serviceCollection.AddHttpClient("API", client =>
         {
-            client.BaseAddress = new Uri("https://curator.kai.ru/api");
+            client.BaseAddress = new Uri("https://sandme.ru/mentors-diary-api/api");
         });
 
         #endif
