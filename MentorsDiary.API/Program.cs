@@ -3,15 +3,8 @@ using MentorsDiary.Persistence.DependencyInjection;
 
 namespace MentorsDiary.API;
 
-/// <summary>
-/// Class Program.
-/// </summary>
 public class Program
 {
-    /// <summary>
-    /// Defines the entry point of the application.
-    /// </summary>
-    /// <param name="args">The arguments.</param>
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
@@ -23,9 +16,9 @@ public class Program
         builder.Services.AddCors(options =>
         {
             options.AddPolicy("AllowSpecificOrigin",
-                builder =>
+                corsPolicyBuilder =>
                 {
-                    builder.WithOrigins("http://localhost:7056")
+                    corsPolicyBuilder.WithOrigins("http://localhost:7056")
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                 });
