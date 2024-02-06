@@ -23,6 +23,12 @@ public class Program
             app.UseHsts();
         }
 
+        app.Map("/mentors-diary-client/", subapp => {
+            subapp.UsePathBase("/mentors-diary-client/");
+            subapp.UseRouting();
+            subapp.UseEndpoints(endpoints => endpoints.MapBlazorHub());
+        });
+
         app.UseHttpsRedirection();
 
         app.UseStaticFiles();
