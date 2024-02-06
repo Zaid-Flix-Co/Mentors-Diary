@@ -9,7 +9,7 @@ public class UserService(IHttpClientFactory clientFactory) : BaseService<User>(c
 
     public async Task<HttpResponseMessage> CreateApplicationUsersAsync(List<User> users)
     {
-        var result = await _authHttpClient?.PostAsJsonAsync($"api/User/CreateApplicationUsers", users)!;
+        var result = await _authHttpClient?.PostAsJsonAsync("api/User/CreateApplicationUsers", users)!;
         return result;
     }
 }
