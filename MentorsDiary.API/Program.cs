@@ -1,5 +1,8 @@
+using MentorsDiary.API.Helpers;
 using MentorsDiary.Application.DependencyInjection;
+#if RELEASE
 using MentorsDiary.Persistence.DependencyInjection;
+#endif
 
 namespace MentorsDiary.API;
 
@@ -11,7 +14,12 @@ public class Program
         
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+        builder.Services.AddSwaggerGen(options =>
+        {
+            #if RELEASE
+            options.DocumentFilter<PrefixDocumentFilter>();
+            #endif
+        });
 
         builder.Services.AddCors(options =>
         {
