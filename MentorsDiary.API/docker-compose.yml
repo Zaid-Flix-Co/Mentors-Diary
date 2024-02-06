@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   db-mentors-diary:
-    container_name: postgres
+    container_name: db-mentors-diary
     image: postgres:latest
     environment:
       POSTGRES_DB: MentorsDiary
