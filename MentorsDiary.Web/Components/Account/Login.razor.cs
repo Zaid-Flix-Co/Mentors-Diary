@@ -43,7 +43,7 @@ public partial class Login
         {
             await MessageService.Success("Вход выполнен успешно")!;
 
-            NavigationManager.NavigateTo("/mentors-diary-client/", true);
+            NavigationManager.NavigateTo("/", true);
         }
         else
             await MessageService.Error("Ошибка входа")!;
